@@ -1,0 +1,66 @@
+/* General */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-image: linear-gradient(rgb(128, 255, 212), rgb(255, 255, 255));
+  background-repeat: no-repeat;
+}
+
+h1 {
+  color: rgb(7, 160, 127);
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Input Styling */
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  height: 1.1rem;
+}
+
+input[type='text'] {
+  margin: 0.7rem;
+}
+
+input[type='number'] {
+  max-width: 8rem;
+}
+
+input[type='date'] {
+  margin: 0.7rem;
+}
+
+/* Buttons */
+div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  height: 2rem;
+  width: 6rem;
+  color: white;
+  margin-left: 1rem;
+}
+
+.btn--submit {
+  background-color: rgb(11, 199, 11);
+  border: 3px solid rgb(12, 156, 12);
+}
+
+.btn--clear-form {
+  background-color: rgb(214, 47, 41);
+  border: 3px solid rgb(167, 45, 7);
+}
