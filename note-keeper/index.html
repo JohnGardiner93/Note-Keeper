@@ -5,27 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Note Keeper</title>
+    <link rel="shortcut icon" href="img/notes.png" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monoton&display=swap"
+      rel="stylesheet"
+    />
     <script defer src="script.js"></script>
-    <a href="\index.html">Main Page</a>
   </head>
   <body>
-    <h1>Note Keeper</h1>
+    <div href="\index.html" class="main_link">Back to Main</div>
+    <div class="header">
+      <img src="img/notes.png" alt="logo" class="header_logo" />
+      <span class="header_text">Note Keeper</span>
+    </div>
     <form class="form">
-      <input
-        type="text"
-        name="Expense Description"
-        placeholder="Expense description"
-      />
-      <span>$</span>
-      <input
-        type="number"
-        name="Expense Amount"
-        placeholder="Amount"
-        min="0.01"
-        step="0.01"
-      />
-      <input type="date" name="Expense Date" />
+      <input type="text" name="Note description" placeholder="" />
     </form>
   </body>
 </html>

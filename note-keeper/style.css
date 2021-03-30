@@ -1,3 +1,8 @@
+/* Variables */
+:root {
+  --logo-size: 3rem;
+}
+
 /* General */
 * {
   margin: 0;
@@ -7,14 +12,44 @@
 }
 
 body {
-  background-image: linear-gradient(rgb(128, 255, 212), rgb(255, 255, 255));
-  background-repeat: no-repeat;
+  background-color: rgba(247, 232, 96, 0.185);
 }
 
 h1 {
   color: rgb(7, 160, 127);
   text-align: center;
   padding: 1rem;
+}
+
+/* Header */
+.main_link {
+  background-color: rgba(177, 161, 22, 0.26);
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: fit-content;
+  border-radius: 0.5rem;
+  box-shadow: black;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: fixed; */
+  /* top: 50%; */
+  /* left: 50%; */
+  /* bring your own prefixes */
+  /* transform: translate(-50%); */
+}
+
+.header_logo {
+  height: var(--logo-size);
+  margin: 0 1rem 0 0;
+}
+
+.header_text {
+  font-family: 'Monoton', cursive;
+  font-size: var(--logo-size);
 }
 
 /* Input Styling */
@@ -32,35 +67,17 @@ input[type='text'] {
   margin: 0.7rem;
 }
 
-input[type='number'] {
-  max-width: 8rem;
-}
-
-input[type='date'] {
-  margin: 0.7rem;
-}
-
 /* Buttons */
-div {
+/* div {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-}
+} */
 
 .btn {
   height: 2rem;
   width: 6rem;
   color: white;
   margin-left: 1rem;
-}
-
-.btn--submit {
-  background-color: rgb(11, 199, 11);
-  border: 3px solid rgb(12, 156, 12);
-}
-
-.btn--clear-form {
-  background-color: rgb(214, 47, 41);
-  border: 3px solid rgb(167, 45, 7);
 }
