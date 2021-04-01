@@ -1,6 +1,11 @@
 /* Variables */
 :root {
   --logo-size: 3rem;
+  --note-color-yellow: rgb(245, 195, 104);
+  --note-color-blue: rgb(104, 130, 245);
+  --note-color-green: rgb(104, 245, 111);
+  --note-color-red: rgb(245, 104, 104);
+  --note-color-purple: rgb(200, 104, 245);
 }
 
 /* General */
@@ -53,18 +58,28 @@ h1 {
 }
 
 /* Input Styling */
-form {
+.form {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-input {
-  height: 1.1rem;
+  border-color: black;
+  border-width: 0.1px;
+  border-radius: 0.5rem;
+  border-style: solid;
+  min-width: 5rem;
+  max-width: 20rem;
+  margin: auto;
+  background-color: rgba(247, 232, 96, 0.185);
+  margin-bottom: 1.5rem;
 }
 
 input[type='text'] {
-  margin: 0.7rem;
+  height: inherit;
+  border-style: none;
+  flex-grow: 1;
+  margin: 0.5rem;
+  background-color: inherit;
+  /* color: rgba(247, 232, 96, 0.185); */
 }
 
 /* Buttons */
@@ -80,4 +95,41 @@ input[type='text'] {
   width: 6rem;
   color: white;
   margin-left: 1rem;
+}
+
+/* Notes */
+.notes_container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  /* flex-direction: row; */
+}
+
+.note {
+  height: 10rem;
+  width: 10rem;
+  padding: 1rem;
+  margin: 0.5rem;
+  border: black;
+  border-style: outset;
+  border-radius: 1rem;
+  border-width: 0.2px;
+}
+
+.note[data-color='yellow'] {
+  background-color: var(--note-color-yellow);
+}
+.note[data-color='blue'] {
+  background-color: var(--note-color-blue);
+}
+.note[data-color='green'] {
+  background-color: var(--note-color-green);
+}
+.note[data-color='red'] {
+  background-color: var(--note-color-red);
+}
+.note[data-color='purple'] {
+  background-color: var(--note-color-purple);
 }
