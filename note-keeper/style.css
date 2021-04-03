@@ -1,11 +1,13 @@
 /* Variables */
 :root {
   --logo-size: 3rem;
-  --note-color-yellow: rgb(245, 195, 104);
-  --note-color-blue: rgb(104, 130, 245);
-  --note-color-green: rgb(104, 245, 111);
-  --note-color-red: rgb(245, 104, 104);
-  --note-color-purple: rgb(200, 104, 245);
+  --note--color-yellow: rgba(247, 218, 123, 0.726);
+  --note--color-blue: rgba(104, 130, 245, 0.76);
+  --note--color-green: rgba(104, 245, 111, 0.589);
+  --note--color-red: rgba(245, 104, 104, 0.664);
+  --note--color-purple: rgba(200, 104, 245, 0.562);
+  --btn--color: rgb(248, 232, 91);
+  --background--color: rgb(255, 251, 190);
 }
 
 /* General */
@@ -17,119 +19,100 @@
 }
 
 body {
-  background-color: rgba(247, 232, 96, 0.185);
-}
-
-h1 {
-  color: rgb(7, 160, 127);
-  text-align: center;
-  padding: 1rem;
+  background-color: var(--background--color);
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Header */
-.main_link {
-  background-color: rgba(177, 161, 22, 0.26);
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 241, 113, 0.658);
+  border-radius: 1rem;
+
+  width: fit-content;
+  box-shadow: 1px 1px 1px black;
+  margin: 0.75rem 0.75rem 0.75rem 0.75rem;
+}
+
+.header--logo {
+  height: var(--logo-size);
+  margin: 0 1rem 0 1rem;
+  /* line-height: 3; */
+}
+
+.header--text {
+  font-family: 'Monoton', cursive;
+  font-size: var(--logo-size);
+  text-align: center;
+  width: fit-content;
+}
+
+/* Buttons */
+.btn--main-link {
   margin: 0.5rem;
   padding: 0.5rem;
   width: fit-content;
   border-radius: 0.5rem;
   box-shadow: black;
+  align-self: flex-start;
 }
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* position: fixed; */
-  /* top: 50%; */
-  /* left: 50%; */
-  /* bring your own prefixes */
-  /* transform: translate(-50%); */
-}
-
-.header_logo {
-  height: var(--logo-size);
-  margin: 0 1rem 0 0;
-}
-
-.header_text {
-  font-family: 'Monoton', cursive;
-  font-size: var(--logo-size);
-}
-
-/* Input Styling */
-.form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-color: black;
-  border-width: 0.1px;
-  border-radius: 0.5rem;
-  border-style: solid;
-  min-width: 5rem;
-  max-width: 20rem;
-  margin: auto;
-  background-color: rgba(247, 232, 96, 0.185);
-  margin-bottom: 1.5rem;
-}
-
-input[type='text'] {
-  height: inherit;
-  border-style: none;
-  flex-grow: 1;
-  margin: 0.5rem;
-  background-color: inherit;
-  /* color: rgba(247, 232, 96, 0.185); */
-}
-
-/* Buttons */
-/* div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-} */
 
 .btn {
-  height: 2rem;
-  width: 6rem;
-  color: white;
-  margin-left: 1rem;
+  background-color: var(--btn--color);
+  box-shadow: 3px 3px 7px black;
+}
+
+.btn--new-note {
+  border-radius: 50%;
+  font: 2.3rem Helvetica, Verdana, Tahoma;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+  text-align: center;
+  margin: 1rem;
 }
 
 /* Notes */
-.notes_container {
+.container--notes {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-
-  /* flex-direction: row; */
 }
 
 .note {
-  height: 10rem;
-  width: 10rem;
+  height: 12rem;
+  width: 12rem;
   padding: 1rem;
   margin: 0.5rem;
   border: black;
   border-style: outset;
   border-radius: 1rem;
   border-width: 0.2px;
+  box-shadow: 1px 1px 1px black;
+}
+
+.note--title {
+  font-weight: bold;
 }
 
 .note[data-color='yellow'] {
-  background-color: var(--note-color-yellow);
+  background-color: var(--note--color-yellow);
 }
 .note[data-color='blue'] {
-  background-color: var(--note-color-blue);
+  background-color: var(--note--color-blue);
 }
 .note[data-color='green'] {
-  background-color: var(--note-color-green);
+  background-color: var(--note--color-green);
 }
 .note[data-color='red'] {
-  background-color: var(--note-color-red);
+  background-color: var(--note--color-red);
 }
 .note[data-color='purple'] {
-  background-color: var(--note-color-purple);
+  background-color: var(--note--color-purple);
 }

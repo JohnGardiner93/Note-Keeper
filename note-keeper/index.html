@@ -15,20 +15,37 @@
     <script defer src="script.js"></script>
   </head>
   <body>
-    <div href="\index.html" class="main_link">Back to Main</div>
-    <div class="header">
-      <img src="img/notes.png" alt="logo" class="header_logo" />
-      <span class="header_text">Note Keeper</span>
-    </div>
-    <div class="form">
+    <div class="btn btn--main-link">Back to Main</div>
+    <section class="header">
+      <img src="img/notes.png" alt="logo" class="header--logo" />
+      <div class="header--text">Note Keeper</div>
+      <div class="btn btn--new-note">+</div>
+    </section>
+    <!-- <div class="form">
       <input type="text" name="Note description" placeholder="Take a note" />
-    </div>
-    <div class="notes_container">
-      <div class="note" data-id="0" data-color="yellow">Note</div>
-      <div class="note" data-id="1" data-color="blue">Note</div>
-      <div class="note" data-id="2" data-color="green">Note</div>
-      <div class="note" data-id="3" data-color="red">Note</div>
-      <div class="note" data-id="4" data-color="purple">Note</div>
-    </div>
+    </div> -->
+    <section class="container--notes">
+      <div class="note" data-id="0" data-color="yellow">
+        <img src="img/trash.png" alt="logo" class="header--logo" />
+        <p class="note--title">Title 1</p>
+        <p class="note--content">This is a note, bla bla bla bla bla bla</p>
+      </div>
+      <div class="note" data-id="1" data-color="blue">
+        <p class="note--title">Title 2</p>
+        <p class="note--content">This is a note, bla bla bla bla bla bla</p>
+      </div>
+      <div class="note" data-id="2" data-color="green">
+        <p class="note--title">Title 3</p>
+        <p class="note--content">This is a note, bla bla bla bla bla bla</p>
+      </div>
+      <div class="note" data-id="3" data-color="red">
+        <p class="note--title">Title 4</p>
+        <p class="note--content">This is a note, bla bla bla bla bla bla</p>
+      </div>
+      <div class="note" data-id="4" data-color="purple">
+        <p class="note--title">Title 5</p>
+        <p class="note--content">This is a note, bla bla bla bla bla bla</p>
+      </div>
+    </section>
   </body>
 </html>
