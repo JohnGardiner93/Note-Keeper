@@ -14,7 +14,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -64,7 +64,7 @@ body {
 
 .btn {
   background-color: var(--btn--color);
-  box-shadow: 3px 3px 7px black;
+  box-shadow: 1px 1px 3px black;
 }
 
 .btn--new-note {
@@ -72,7 +72,6 @@ body {
   font: 2.3rem Helvetica, Verdana, Tahoma;
   height: 2.5rem;
   min-width: 2.5rem;
-  padding: 0.25rem 0.25rem 0.25rem 0.25rem;
   text-align: center;
   margin: 1rem;
 }
@@ -86,19 +85,55 @@ body {
 }
 
 .note {
-  height: 12rem;
-  width: 12rem;
+  position: relative;
+  height: 15rem;
+  width: 15rem;
   padding: 1rem;
   margin: 0.5rem;
-  border: black;
+  border: 0.2px solid black;
   border-style: outset;
   border-radius: 1rem;
-  border-width: 0.2px;
-  box-shadow: 1px 1px 1px black;
+  /* box-shadow: 1px 1px 1px black; */
+}
+
+.note--content {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  max-height: 12rem;
 }
 
 .note--title {
   font-weight: bold;
+  max-height: 2.1rem;
+  max-width: 11rem;
+  overflow: hidden;
+  margin-bottom: 0.2rem;
+  /* border: 1px black solid; */
+}
+
+.note--text-body {
+  overflow: hidden;
+  max-height: 9.7rem;
+  line-height: 1.2rem;
+  /* border: 0.1rem black solid; */
+}
+
+.btn--delete-note {
+  position: absolute;
+  height: 1.6rem;
+  width: 1.6rem;
+  background-image: url('img/X.png');
+  background-size: 1.7rem;
+  background-position: center;
+  opacity: 0%;
+  /* opacity: 100%; */
+  /* box-shadow: 0px 0px 0px black; */
+  border-radius: 50%;
+  padding: 0.2rem;
+  top: 1%;
+  left: 88%;
+  /* border: 1px black solid; */
 }
 
 .note[data-color='yellow'] {
@@ -115,4 +150,21 @@ body {
 }
 .note[data-color='purple'] {
   background-color: var(--note--color-purple);
+}
+
+/* Animations/Dynamic Effects */
+.note:hover {
+  border: 2px solid black;
+}
+
+.note:hover .btn--delete-note {
+  opacity: 100%;
+}
+
+.btn--delete-note:hover {
+  box-shadow: 2px 2px 2px black;
+}
+
+.btn:hover {
+  box-shadow: 3px 3px 7px black;
 }
