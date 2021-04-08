@@ -83,5 +83,54 @@
         </p>
       </div>
     </section>
+    <div id="modalWindow" class="modal--background">
+      <div class="modal--note">
+        <div class="btn--modal--close">&times;</div>
+        <p
+          contenteditable="true"
+          aria-multiline="true"
+          role="textbox"
+          spellcheck="true"
+          class="modal--note-title"
+        >
+          Note Title
+        </p>
+        <p
+          contenteditable="true"
+          aria-multiline="true"
+          role="textbox"
+          spellcheck="true"
+          class="modal--note-text"
+        >
+          Default model text
+        </p>
+
+        <div class="modal--footer">
+          <div class="color-picker">
+            <div
+              class="color-picker--dot color-picker--dot--modal btn"
+              data-color="yellow"
+            ></div>
+            <div
+              class="color-picker--dot color-picker--dot--modal btn"
+              data-color="blue"
+            ></div>
+            <div
+              class="color-picker--dot color-picker--dot--modal btn"
+              data-color="green"
+            ></div>
+            <div
+              class="color-picker--dot color-picker--dot--modal btn"
+              data-color="red"
+            ></div>
+            <div
+              class="color-picker--dot color-picker--dot--modal btn"
+              data-color="purple"
+            ></div>
+          </div>
+          <img src="img/trash.png" class="btn--modal--delete-note" />
+        </div>
+      </div>
+    </div>
   </body>
 </html>
