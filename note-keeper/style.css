@@ -108,6 +108,10 @@ body {
   opacity: 100%;
 }
 
+.note:hover .note--footer {
+  opacity: 100%;
+}
+
 .note--content {
   display: flex;
   align-items: flex-start;
@@ -129,6 +133,20 @@ body {
   max-height: 9.7rem;
   line-height: 1.2rem;
   /* border: 0.1rem black solid; */
+}
+
+.note--footer {
+  opacity: 0%;
+  width: fit-content;
+  position: absolute;
+  top: 87%;
+  left: 16%;
+}
+
+.note--footer div.color-picker {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-self: flex-end; */
 }
 
 .btn--delete-note {
@@ -171,8 +189,8 @@ body {
 
 /* Modal Window - Note Editing */
 .modal--background {
-  display: block;
-  /* display: none; */
+  /* display: block; */
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -185,6 +203,8 @@ body {
 }
 
 .modal--note {
+  display: flex;
+  flex-direction: column;
   background-color: white;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 1rem;
@@ -199,6 +219,8 @@ body {
   margin-bottom: 1%;
   font-size: larger;
   outline: none;
+  max-height: 3rem;
+  overflow: hidden;
 }
 
 .modal--note-text {
@@ -207,9 +229,7 @@ body {
   overflow: auto;
   width: 100%;
   outline: none;
-  /* max-height: 10rem; */
-  /* max-height: 30%; */
-  height: 30%;
+  max-height: calc(100vh - 65vh);
 }
 
 .modal--footer {
@@ -224,7 +244,8 @@ body {
 
 .btn--modal--close {
   color: #aaa;
-  float: right;
+  /* float: right; */
+  align-self: flex-end;
   font-size: 28px;
   font-weight: bold;
   margin-top: -3%;
@@ -271,8 +292,8 @@ body {
 }
 
 .color-picker--dot--note {
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   margin: 0rem 0.25rem 0rem 0.25rem;
 }
 
