@@ -3,39 +3,36 @@
 import * as model from './model.js';
 import notesView from './views/notesView.js';
 import editNotesView from './views/editNoteView.js';
+import headerView from './views/headerView.js';
 
-// Get Elements
-const notesContainerEl = document.querySelector(`.container--notes`);
-const noteElements = notesContainerEl.querySelectorAll(`.note`);
-const btnAddNote = document.querySelector(`.btn--new-note`);
+const controlNoteEditor = function () {
+  // 1. Read the ID of the element that initiated the function (if it exists)
+  let id = this.dataset?.id ?? -1;
+  console.log(id);
+  // 2. If this is a new note, a new ID and note must be made
+  if (id === -1) {
+    model.createNewNote();
+    id = model.state.notes.slice(-1).id;
+  }
 
-const noteEditorWindowEl = document.querySelector(`.modal--background`);
-const noteEditorNoteTitleEl = noteEditorWindowEl.querySelector(
-  `.modal--note-title`
-);
-const noteEditorNoteTextEl = noteEditorWindowEl.querySelector(
-  `.modal--note-text`
-);
-const btnEditorClose = noteEditorWindowEl.querySelector(`.btn--modal--close`);
+  console.log(id);
 
-console.log(noteElements);
+  try {
+    // 3. Load the note in the model
+    model.loadNote(id);
 
-// Variables
-const notesList = [];
+    // 4. Load the note in the view
+    editNotesView.renderNote(model.currentNote.title, model.currentNote.text);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-// Functions
+const init = function () {
+  headerView.addHandlerNewNoteButton(controlNoteEditor);
+};
 
-////////////////////////////////////////////
-// Add Event Listeners
-// Main Page
-btnAddNote.addEventListener(`click`, renderNoteEditor);
+init();
 
-// Note Editor
-btnEditorClose.addEventListener(`click`, closeNoteEditor);
-
-// Main Code
-
-////////////////////////////////////////////
-// Test Code
-
-// noteElements.forEach(el => el.addEventListener);
+// btnAddNote.addEventListener(`click`, renderNoteEditor);
+// btnEditorClose.addEventListener(`click`, closeNoteEditor);

@@ -1,15 +1,26 @@
 class editNoteView {
-  renderNoteEditor(id = -1) {
-    const title = `Note Title`;
-    const content = `Note Content`;
+  _parentEl = document.querySelector(`.modal--background`);
 
-    noteEditorNoteTitleEl.textContent = title;
-    noteEditorNoteTextEl.textContent = content;
+  renderNote(title = `Note Title`, content = `Note Content`, color = `yellow`) {
+    // Display note based on provided parameters
+    this._parentEl.querySelector(`.modal--note-title`).textContent = title;
+    this._parentEl.querySelector(`.modal--note-text`).textContent = content;
+    this._parentEl.querySelector(
+      `.modal--note`
+    ).style.backgroundColor = `--note--color-${color}`;
 
-    noteEditorWindowEl.style.display = `block`;
+    this.renderNoteEditor();
+  }
+
+  renderNoteEditor() {
+    this._parentEl.style.display = `block`;
   }
 
   closeNoteEditor() {
-    noteEditorWindowEl.style.display = `none`;
+    this._parentEl.style.display = `none`;
   }
 }
+
+export default new editNoteView();
+
+// const btnEditorClose = noteEditorWindowEl.querySelector(`.btn--modal--close`);
