@@ -13,12 +13,12 @@ export const state = {
 };
 
 class Note {
-  _title = `bean title`;
-  _text = ``;
-  _color = `yellow`;
-  _id = -1;
-
-  constructor(title = `UGH`, text, color, id) {
+  constructor(
+    title = `Note Title`,
+    text = `Note Text`,
+    color = `yellow`,
+    id = -1
+  ) {
     this._title = title;
     this._text = text;
     this._color = color;
@@ -40,7 +40,7 @@ class Note {
   }
 
   get text() {
-    return this._title;
+    return this._text;
   }
 
   set id(id) {
@@ -71,6 +71,7 @@ export const loadNote = function (id) {
   // Get the note
   const [note] = state.notes.filter(note => note.id === id);
 
+  console.log(note);
   // Load the note
   state.currentNote.title = note.title;
   state.currentNote.text = note.text;
@@ -82,21 +83,19 @@ export const createNewNote = function () {
   const note = new Note();
   note.id = _generateNextID();
   _addNoteToList(note);
+  return note.id;
 };
 
 const _generateNextID = function () {
   const id = state.idLedger;
   state.idLedger++;
-  console.log(`Generated ID ${id}`);
+  // console.log(`Generated ID ${id}`);
   return id;
 };
 
 const _addNoteToList = function (note) {
-  console.log(note);
-  console.log(note._title);
-  if (!_noteIDExists(note.id)) return;
+  if (_noteIDExists(note.id)) return;
   state.notes.push(note);
-  console.log(`I pushed the note`);
 };
 
 const _noteIDExists = function (id) {

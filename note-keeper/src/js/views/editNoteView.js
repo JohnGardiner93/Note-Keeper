@@ -1,13 +1,14 @@
 class editNoteView {
   _parentEl = document.querySelector(`.modal--background`);
+  _noteEl = this._parentEl.querySelector(`.modal--note`);
+  _noteTitleEL = this._parentEl.querySelector(`.modal--note-title`);
+  _noteTextEL = this._parentEl.querySelector(`.modal--note-text`);
 
   renderNote(title = `Note Title`, content = `Note Content`, color = `yellow`) {
     // Display note based on provided parameters
-    this._parentEl.querySelector(`.modal--note-title`).textContent = title;
-    this._parentEl.querySelector(`.modal--note-text`).textContent = content;
-    this._parentEl.querySelector(
-      `.modal--note`
-    ).style.backgroundColor = `--note--color-${color}`;
+    this._noteTitleEL.textContent = title;
+    this._noteTextEL.textContent = content;
+    this._noteEl.style.backgroundColor = `var(--note-color--${color}-solid)`;
 
     this.renderNoteEditor();
   }
