@@ -47,6 +47,14 @@ const controlNoteEditorSave = function () {
 
 const controlNoteEditorClose = function () {
   model.saveCurrentNote();
+
+  notesView.renderNote(
+    model.state.currentNote.id,
+    model.state.currentNote.title,
+    model.state.currentNote.text,
+    model.state.currentNote.color
+  );
+
   // Close the note editor
   model.unloadCurrentNote();
 
