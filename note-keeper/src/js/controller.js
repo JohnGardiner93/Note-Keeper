@@ -2,10 +2,12 @@
 
 import * as model from './model.js';
 import notesView from './views/notesView.js';
-import editNotesView from './views/editNoteView.js';
+import editNoteView from './views/editNoteView.js';
 import headerView from './views/headerView.js';
 
-const controlNoteEditor = function () {
+////////////////////////////////////////////
+// Notes View Controls
+const controlNotesViewOpenNote = function () {
   // 1. Read the ID of the element that initiated the function (if it exists)
   let id = this.dataset?.id ?? -1;
   // 2. If this is a new note, a new ID and note must be made
@@ -19,7 +21,7 @@ const controlNoteEditor = function () {
     model.loadNote(id);
 
     // 4. Load the note in the view
-    editNotesView.renderNote(
+    editNoteView.renderNote(
       model.state.currentNote.title,
       model.state.currentNote.text
     );
@@ -28,12 +30,41 @@ const controlNoteEditor = function () {
   }
 };
 
-const controlNoteEditorCloseButton = function () {
-  // model.state.currentNote.title = editNotesView.
+const controlNotesViewDeleteNote = function () {};
+
+const controlNotesViewChangeNoteColor = function () {};
+
+////////////////////////////////////////////
+// Note Editor Controls
+const controlNoteEditorSave = function () {
+  // Get note data
+  const [title, text, color] = editNoteView.getNoteState();
+  console.log(title, text, color);
+  // Save the note data in the model
+  model.editCurrentNote(title, text, color);
+  model.saveCurrentNote();
 };
 
+const controlNoteEditorClose = function () {
+  model.saveCurrentNote();
+  // Close the note editor
+  model.unloadCurrentNote();
+
+  editNoteView.closeNoteEditor();
+};
+
+const controlNoteEditorDelete = function () {};
+
+const controlNoteEditorChangeNoteColor = function () {};
+
+////////////////////////////////////////////
+// Header Controls
+const controlHeaderBackToMainPage = function () {};
+
 const init = function () {
-  headerView.addHandlerNewNoteButton(controlNoteEditor);
+  headerView.addHandlerNewNoteButton(controlNotesViewOpenNote);
+  editNoteView.addHandlersFocusOut(controlNoteEditorSave);
+  editNoteView.addHandlerCloseButton(controlNoteEditorClose);
 };
 
 init();
