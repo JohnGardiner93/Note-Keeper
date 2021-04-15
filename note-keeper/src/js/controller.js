@@ -53,7 +53,12 @@ const controlNoteEditorClose = function () {
   editNoteView.closeNoteEditor();
 };
 
-const controlNoteEditorDelete = function () {};
+const controlNoteEditorDelete = function () {
+  editNoteView.closeNoteEditor();
+
+  model.deleteNote();
+  model.unloadCurrentNote();
+};
 
 const controlNoteEditorChangeNoteColor = function () {};
 
@@ -65,6 +70,7 @@ const init = function () {
   headerView.addHandlerNewNoteButton(controlNotesViewOpenNote);
   editNoteView.addHandlersFocusOut(controlNoteEditorSave);
   editNoteView.addHandlerCloseButton(controlNoteEditorClose);
+  editNoteView.addHandlerDeleteButton(controlNoteEditorDelete);
 };
 
 init();

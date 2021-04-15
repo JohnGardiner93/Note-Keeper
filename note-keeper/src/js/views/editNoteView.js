@@ -58,6 +58,12 @@ class editNoteView {
     this._noteEl.dataset.color = color;
     this._noteEl.style.backgroundColor = `var(--note-color--${color}-solid)`;
   }
+
+  addHandlerDeleteButton(handler) {
+    this._noteEl
+      .querySelector(`.btn--modal--delete-note`)
+      .addEventListener(`click`, handler);
+  }
 }
 
 export default new editNoteView();

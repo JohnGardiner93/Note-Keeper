@@ -1,0 +1,8 @@
+Bugs
+
+Styling
+- Note Editor
+-- close button (x) wanders at wider screen ratios
+-- width of modal note looks bad on wide screens
+-- modal footer and modal note min width don't agree
+-- Disable scrolling in model note?

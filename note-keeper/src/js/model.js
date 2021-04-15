@@ -122,7 +122,7 @@ export const editCurrentNote = function (title, text, color) {
     ? color
     : NOTE_COLORS[0];
   console.log(title, text, color);
-  console.log(state.currentNote);
+  console.log(`editCurrentNOte`, state.currentNote);
 };
 
 export const saveCurrentNote = function () {
@@ -146,6 +146,7 @@ export const saveCurrentNote = function () {
   state.notes[noteIndex].color = state.currentNote.color;
 
   console.log(state.notes[noteIndex]);
+  console.log(`saveCurrentNote`, state.currentNote);
 };
 
 export const unloadCurrentNote = function () {
@@ -153,4 +154,12 @@ export const unloadCurrentNote = function () {
   state.currentNote.text = DEFAULT_NOTE_TEXT[2];
   state.currentNote.color = `none`;
   state.currentNote.id = -1;
+};
+
+export const deleteNote = function (id) {
+  //Allow for blank pass into deleteNote to indicate delete current note
+  const noteID = id ?? state.currentNote.id;
+  console.log(`Before deleting`, state.notes);
+  state.notes = state.notes.filter(note => note.id !== noteID);
+  console.log(`After deleting`, state.notes);
 };
