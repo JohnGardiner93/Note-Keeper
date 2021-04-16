@@ -6,6 +6,16 @@ class NotesView {
       `beforeend`,
       this._generateNoteMarkup(id, title, text, color)
     );
+    return this._parentEl.lastElementChild;
+  }
+
+  addHandlerDeleteNoteButton(handler, element) {
+    element.addEventListener('click', handler.bind(element));
+  }
+
+  removeNote(element) {
+    element.remove();
+    // console.log(element);
   }
 
   _generateNoteMarkup(id, title, text, color) {

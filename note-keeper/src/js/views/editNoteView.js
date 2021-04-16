@@ -6,7 +6,7 @@ class editNoteView {
   _noteEl = this._parentEl.querySelector(`.modal--note`);
   _noteTitleEl = this._parentEl.querySelector(`.modal--note-title`);
   _noteTextEl = this._parentEl.querySelector(`.modal--note-text`);
-  _noteTextEl = this._parentEl.querySelector(`.modal--note-text`);
+  _colorPickerEl = this._parentEl.querySelector(`.color-picker`);
 
   renderNote(
     title = DEFAULT_NOTE_TEXT[0],
@@ -38,7 +38,16 @@ class editNoteView {
     );
   }
 
-  addHandlersColorPicker(handler) {}
+  addHandlersColorPicker(handler) {
+    this._colorPickerEl.addEventListener(
+      `click`,
+      function (e) {
+        if (![...e.target.classList].includes(`color-picker--dot`)) return;
+        this._changeNoteColor(e.target.dataset.color);
+        handler();
+      }.bind(this)
+    );
+  }
 
   getNoteState() {
     return [

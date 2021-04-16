@@ -23,14 +23,18 @@ const controlNotesViewOpenNote = function () {
     // 4. Load the note in the view
     editNoteView.renderNote(
       model.state.currentNote.title,
-      model.state.currentNote.text
+      model.state.currentNote.text,
+      model.state.currentNote.color
     );
   } catch (error) {
     console.error(error);
   }
 };
 
-const controlNotesViewDeleteNote = function () {};
+const controlNotesViewDeleteNote = function () {
+  notesView.removeNote(this);
+  model.deleteNote(this.dataset.id);
+};
 
 const controlNotesViewChangeNoteColor = function () {};
 
@@ -48,12 +52,16 @@ const controlNoteEditorSave = function () {
 const controlNoteEditorClose = function () {
   model.saveCurrentNote();
 
-  notesView.renderNote(
+  // ADD UPDATE VS NEW NOTE PATH
+  const note = notesView.renderNote(
     model.state.currentNote.id,
     model.state.currentNote.title,
     model.state.currentNote.text,
     model.state.currentNote.color
   );
+
+  // Add note event handlers
+  notesView.addHandlerDeleteNoteButton(controlNotesViewDeleteNote, note);
 
   // Close the note editor
   model.unloadCurrentNote();
@@ -68,7 +76,7 @@ const controlNoteEditorDelete = function () {
   model.unloadCurrentNote();
 };
 
-const controlNoteEditorChangeNoteColor = function () {};
+// const controlNoteEditorChangeNoteColor = function () {};
 
 ////////////////////////////////////////////
 // Header Controls
@@ -79,6 +87,7 @@ const init = function () {
   editNoteView.addHandlersFocusOut(controlNoteEditorSave);
   editNoteView.addHandlerCloseButton(controlNoteEditorClose);
   editNoteView.addHandlerDeleteButton(controlNoteEditorDelete);
+  editNoteView.addHandlersColorPicker(controlNoteEditorSave);
 };
 
 init();

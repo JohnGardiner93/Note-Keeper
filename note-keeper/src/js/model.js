@@ -9,6 +9,7 @@ export const state = {
     text: DEFAULT_NOTE_TEXT[2],
     color: NOTE_COLORS[0],
     id: -1,
+    isNewNote: false,
   },
   idLedger: 0,
 };
@@ -18,12 +19,14 @@ class Note {
     title = DEFAULT_NOTE_TEXT[0],
     text = DEFAULT_NOTE_TEXT[1],
     color = NOTE_COLORS[0],
-    id = -1
+    id = -1,
+    isNewNote = false
   ) {
     this._title = title;
     this._text = text;
     this._color = color;
     this._id = id;
+    this._isNewNote = isNewNote;
   }
 
   set title(title) {
@@ -61,6 +64,14 @@ class Note {
   get color() {
     return this._color;
   }
+
+  set isNewNote(isNewNote) {
+    this._isNewNote = isNewNote;
+  }
+
+  get isNewNote() {
+    return this._isNewNote;
+  }
 }
 
 export const loadNote = function (id) {
@@ -84,6 +95,7 @@ export const loadNote = function (id) {
 export const createNewNote = function () {
   const note = new Note();
   note.id = _generateNextID();
+  note.isNewNote = true;
   _addNoteToList(note);
   return note.id;
 };
@@ -159,7 +171,7 @@ export const unloadCurrentNote = function () {
 export const deleteNote = function (id) {
   //Allow for blank pass into deleteNote to indicate delete current note
   const noteID = id ?? state.currentNote.id;
-  console.log(`Before deleting`, state.notes);
+  console.log(`Before deleting ${noteID}`, state.notes);
   state.notes = state.notes.filter(note => note.id !== noteID);
   console.log(`After deleting`, state.notes);
 };

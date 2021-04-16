@@ -316,3 +316,19 @@ body {
 .color-picker--dot[data-color='purple'] {
   background-color: var(--note-color--purple);
 }
+
+.color-picker--active[data-color='yellow'] {
+  border-color: var(--note-color--yellow);
+}
+.color-picker--active[data-color='blue'] {
+  border-color: var(--note-color--blue);
+}
+.color-picker--active[data-color='green'] {
+  border-color: var(--note-color--green);
+}
+.color-picker--active[data-color='red'] {
+  border-color: var(--note-color--red);
+}
+.color-picker--active[data-color='purple'] {
+  border-color: var(--note-color--purple);
+}
