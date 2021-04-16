@@ -2,11 +2,24 @@ class NotesView {
   _parentEl = document.querySelector(`.container--notes`);
 
   renderNote(id, title, text, color) {
-    this._parentEl.insertAdjacentHTML(
-      `beforeend`,
-      this._generateNoteMarkup(id, title, text, color)
-    );
-    return this._parentEl.lastElementChild;
+    // If the note exists, update the note you already have
+    const note = this._findNote(id);
+    const markup = this._generateNoteMarkup(id, title, text, color);
+    console.log(`I'm gonna render this note:`, note);
+
+    if (note !== undefined) {
+      note.querySelector(`.note--title`).textContent = title;
+      note.querySelector(`.note--text-body`).textContent = title;
+      return note;
+    } else {
+      this._parentEl.insertAdjacentHTML(`beforeend`, markup);
+      return this._parentEl.lastElementChild;
+    }
+  }
+
+  removeNote(element) {
+    element.remove();
+    // console.log(element);
   }
 
   addHandlerDeleteNoteButton(handler, element) {
@@ -15,9 +28,20 @@ class NotesView {
       .addEventListener('click', handler.bind(element));
   }
 
-  removeNote(element) {
-    element.remove();
-    // console.log(element);
+  addHandlerClickNote(handler, element) {
+    element.addEventListener(
+      `click`,
+      function (e) {
+        if (![...e.target.classList].includes(`note`)) return;
+        handler.bind(element)();
+      }.bind(element)
+    );
+  }
+
+  _findNote(id) {
+    return [...this._parentEl.querySelectorAll(`.note`)].find(
+      note => Number(note.dataset.id) === id
+    );
   }
 
   _generateNoteMarkup(id, title, text, color) {

@@ -11,9 +11,9 @@ import { DEBUG_MODE } from './config.js';
 ////////////////////////////////////////////
 // Notes View Controls
 const controlNotesViewOpenNote = function () {
-  // 1. Read the ID of the element that initiated the function (if it exists)
-  let id = this.dataset?.id ?? -1;
-  // 2. If this is a new note, a new ID and note must be made
+  // Read the ID of the element that initiated the function (if it exists)
+  let id = Number(this.dataset?.id) || -1;
+  // If this is a new note, a new ID and note must be made
   if (id === -1) {
     id = model.createNewNote();
     console.log(`Here is the new id`, id);
@@ -21,6 +21,7 @@ const controlNotesViewOpenNote = function () {
 
   try {
     // 3. Load the note in the model
+    console.log(model.state);
     model.loadNote(id);
 
     // 4. Load the note in the view
@@ -84,6 +85,7 @@ const _renderNote = function (id, title, text, color) {
 
   // Add note event handlers
   notesView.addHandlerDeleteNoteButton(controlNotesViewDeleteNote, note);
+  notesView.addHandlerClickNote(controlNotesViewOpenNote, note);
 };
 
 ////////////////////////////////////////////
