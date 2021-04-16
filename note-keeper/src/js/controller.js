@@ -5,6 +5,9 @@ import notesView from './views/notesView.js';
 import editNoteView from './views/editNoteView.js';
 import headerView from './views/headerView.js';
 
+import { DEBUG_STATE } from './config.js';
+import { DEBUG_MODE } from './config.js';
+
 ////////////////////////////////////////////
 // Notes View Controls
 const controlNotesViewOpenNote = function () {
@@ -33,7 +36,7 @@ const controlNotesViewOpenNote = function () {
 
 const controlNotesViewDeleteNote = function () {
   notesView.removeNote(this);
-  model.deleteNote(this.dataset.id);
+  model.deleteNote(Number(this.dataset.id));
 };
 
 const controlNotesViewChangeNoteColor = function () {};
@@ -53,15 +56,12 @@ const controlNoteEditorClose = function () {
   model.saveCurrentNote();
 
   // ADD UPDATE VS NEW NOTE PATH
-  const note = notesView.renderNote(
+  _renderNote(
     model.state.currentNote.id,
     model.state.currentNote.title,
     model.state.currentNote.text,
     model.state.currentNote.color
   );
-
-  // Add note event handlers
-  notesView.addHandlerDeleteNoteButton(controlNotesViewDeleteNote, note);
 
   // Close the note editor
   model.unloadCurrentNote();
@@ -78,11 +78,27 @@ const controlNoteEditorDelete = function () {
 
 // const controlNoteEditorChangeNoteColor = function () {};
 
+const _renderNote = function (id, title, text, color) {
+  // ADD UPDATE VS NEW NOTE PATH
+  const note = notesView.renderNote(id, title, text, color);
+
+  // Add note event handlers
+  notesView.addHandlerDeleteNoteButton(controlNotesViewDeleteNote, note);
+};
+
 ////////////////////////////////////////////
 // Header Controls
 const controlHeaderBackToMainPage = function () {};
 
+////////////////////////////////////////////
 const init = function () {
+  if (DEBUG_MODE) {
+    model.state.notes = DEBUG_STATE.notes;
+    model.state.idLedger = DEBUG_STATE.idLedger;
+  }
+  model.state.notes.forEach(note =>
+    _renderNote(note.id, note.title, note.text, note.color)
+  );
   headerView.addHandlerNewNoteButton(controlNotesViewOpenNote);
   editNoteView.addHandlersFocusOut(controlNoteEditorSave);
   editNoteView.addHandlerCloseButton(controlNoteEditorClose);

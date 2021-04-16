@@ -10,7 +10,9 @@ class NotesView {
   }
 
   addHandlerDeleteNoteButton(handler, element) {
-    element.addEventListener('click', handler.bind(element));
+    element
+      .querySelector(`.btn--delete-note`)
+      .addEventListener('click', handler.bind(element));
   }
 
   removeNote(element) {
