@@ -10,9 +10,12 @@ import { DEBUG_MODE } from './config.js';
 
 ////////////////////////////////////////////
 // Notes View Controls
-const controlNotesViewOpenNote = function () {
+const controlNotesViewCreateNewNote = function () {
   // Read the ID of the element that initiated the function (if it exists)
-  let id = Number(this.dataset?.id) || -1;
+  // console.log(this);
+  // console.log(this.dataset?.id);
+  let id = this.dataset?.id ?? -1;
+  // console.log(id);
   // If this is a new note, a new ID and note must be made
   if (id === -1) {
     id = model.createNewNote();
@@ -22,10 +25,17 @@ const controlNotesViewOpenNote = function () {
   try {
     // 3. Load the note in the model
     console.log(model.state);
-    model.loadNote(id);
+    model.loadNote(Number(id));
 
     // 4. Load the note in the view
     editNoteView.renderNote(
+      model.state.currentNote.title,
+      model.state.currentNote.text,
+      model.state.currentNote.color
+    );
+
+    _notesViewRenderNote(
+      model.state.currentNote.id,
       model.state.currentNote.title,
       model.state.currentNote.text,
       model.state.currentNote.color
@@ -40,52 +50,70 @@ const controlNotesViewDeleteNote = function () {
   model.deleteNote(Number(this.dataset.id));
 };
 
-const controlNotesViewChangeNoteColor = function () {};
+const controlNotesViewChangeNoteColor = function () {
+  console.log(`controller view notes change color`, this);
+  model.saveNote(this.dataset.id, undefined, undefined, this.dataset.color);
+};
+
+const controlNotesViewOpenNote = function () {
+  try {
+    model.loadNote(Number(this.dataset?.id));
+
+    // 4. Load the note in the view
+    editNoteView.renderNote(
+      model.state.currentNote.title,
+      model.state.currentNote.text,
+      model.state.currentNote.color
+    );
+  } catch (error) {}
+};
 
 ////////////////////////////////////////////
 // Note Editor Controls
-const controlNoteEditorSave = function () {
+const controlNoteEditorUpdateNoteModel = function () {
   // Get note data
   const [title, text, color] = editNoteView.getNoteState();
   console.log(title, text, color);
-  // Save the note data in the model
+  // Edit the note data in the model
   model.editCurrentNote(title, text, color);
-  model.saveCurrentNote();
 };
+
+// const controlNoteEditorHighlightTextField = function () {};
 
 const controlNoteEditorClose = function () {
   model.saveCurrentNote();
 
-  // ADD UPDATE VS NEW NOTE PATH
-  _renderNote(
+  notesView.updateNoteContents(
     model.state.currentNote.id,
     model.state.currentNote.title,
     model.state.currentNote.text,
     model.state.currentNote.color
   );
 
-  // Close the note editor
   model.unloadCurrentNote();
 
+  // Close the note editor
   editNoteView.closeNoteEditor();
 };
 
 const controlNoteEditorDelete = function () {
   editNoteView.closeNoteEditor();
 
+  notesView.removeNoteByID(model.state.currentNote.id);
   model.deleteNote();
   model.unloadCurrentNote();
 };
 
 // const controlNoteEditorChangeNoteColor = function () {};
 
-const _renderNote = function (id, title, text, color) {
+const _notesViewRenderNote = function (id, title, text, color) {
   // ADD UPDATE VS NEW NOTE PATH
   const note = notesView.renderNote(id, title, text, color);
 
   // Add note event handlers
   notesView.addHandlerDeleteNoteButton(controlNotesViewDeleteNote, note);
   notesView.addHandlerClickNote(controlNotesViewOpenNote, note);
+  notesView.addHandlersColorPickerNote(controlNotesViewChangeNoteColor, note);
 };
 
 ////////////////////////////////////////////
@@ -99,13 +127,14 @@ const init = function () {
     model.state.idLedger = DEBUG_STATE.idLedger;
   }
   model.state.notes.forEach(note =>
-    _renderNote(note.id, note.title, note.text, note.color)
+    _notesViewRenderNote(note.id, note.title, note.text, note.color)
   );
-  headerView.addHandlerNewNoteButton(controlNotesViewOpenNote);
-  editNoteView.addHandlersFocusOut(controlNoteEditorSave);
+  headerView.addHandlerNewNoteButton(controlNotesViewCreateNewNote);
+  editNoteView.addHandlerTextElementsFocusOut(controlNoteEditorUpdateNoteModel);
   editNoteView.addHandlerCloseButton(controlNoteEditorClose);
   editNoteView.addHandlerDeleteButton(controlNoteEditorDelete);
-  editNoteView.addHandlersColorPicker(controlNoteEditorSave);
+  editNoteView.addHandlersColorPicker(controlNoteEditorUpdateNoteModel);
+  editNoteView.addHandlerTextElementsFocusIn();
 };
 
 init();

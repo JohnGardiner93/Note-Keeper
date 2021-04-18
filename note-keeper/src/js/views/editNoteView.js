@@ -7,6 +7,7 @@ class editNoteView {
   _noteTitleEl = this._parentEl.querySelector(`.modal--note-title`);
   _noteTextEl = this._parentEl.querySelector(`.modal--note-text`);
   _colorPickerEl = this._parentEl.querySelector(`.color-picker`);
+  _noteTouched = false;
 
   renderNote(
     title = DEFAULT_NOTE_TEXT[0],
@@ -28,13 +29,21 @@ class editNoteView {
   closeNoteEditor() {
     this._parentEl.style.display = `none`;
     this._noteTitleEl.textContent = DEFAULT_NOTE_TEXT[0];
-    this._noteTextEl.textContent = DEFAULT_NOTE_TEXT[0];
+    this._noteTextEl.textContent = DEFAULT_NOTE_TEXT[1];
     this._changeNoteColor(NOTE_COLORS[0]);
   }
 
-  addHandlersFocusOut(handler) {
+  addHandlerTextElementsFocusOut(handler) {
     [this._noteTitleEl, this._noteTextEl].forEach(el =>
       el.addEventListener(`focusout`, handler)
+    );
+  }
+
+  addHandlerTextElementsFocusIn() {
+    [this._noteTitleEl, this._noteTextEl].forEach(el =>
+      el.addEventListener(`focusin`, function (e) {
+        // e.target.select();
+      })
     );
   }
 
@@ -72,6 +81,10 @@ class editNoteView {
     this._noteEl
       .querySelector(`.btn--modal--delete-note`)
       .addEventListener(`click`, handler);
+  }
+
+  touchNote() {
+    this._noteTouched = true;
   }
 }
 

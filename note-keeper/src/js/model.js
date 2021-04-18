@@ -40,7 +40,7 @@ class Note {
 
   set text(text) {
     if (!text) return;
-    this._title = text;
+    this._text = text;
   }
 
   get text() {
@@ -103,7 +103,6 @@ export const createNewNote = function () {
 const _generateNextID = function () {
   const id = state.idLedger;
   state.idLedger++;
-  // console.log(`Generated ID ${id}`);
   return id;
 };
 
@@ -115,7 +114,7 @@ const _addNoteToList = function (note) {
 
 const _noteIDExists = function (id) {
   // See if note ID is already in list
-  return state.notes.some(item => item.id === id);
+  return state.notes.some(item => item.id === Number(id));
 };
 
 const _retrieveNoteIndex = function (id) {
@@ -123,10 +122,6 @@ const _retrieveNoteIndex = function (id) {
 };
 
 export const editCurrentNote = function (title, text, color) {
-  // if (!(id === state.currentNote.id))
-  //   throw new Error(
-  //     `ID of the note you are attempting to edit does not match the model's currently registered ID. Edit aborted`
-  //   );
   console.log(`Editing Note`);
   state.currentNote.title = title.toString();
   state.currentNote.text = text.toString();
@@ -134,30 +129,17 @@ export const editCurrentNote = function (title, text, color) {
     ? color
     : NOTE_COLORS[0];
   console.log(title, text, color);
-  console.log(`editCurrentNOte`, state.currentNote);
+  console.log(`editCurrentNote`, state.currentNote);
 };
 
 export const saveCurrentNote = function () {
-  if (!_noteIDExists(state.currentNote.id))
-    throw new Error(
-      `The note ID you are trying to save is not registered. Save operation aborted`
-    );
+  this.saveNote(
+    state.currentNote.id,
+    state.currentNote.title,
+    state.currentNote.text,
+    state.currentNote.color
+  );
 
-  const noteIndex = _retrieveNoteIndex(state.currentNote.id);
-
-  // Object.assign(state.notes[noteIndex], {
-  //   title: state.currentNote.title,
-  //   text: state.currentNote.text,
-  //   color: NOTE_COLORS.includes(state.currentNote.color)
-  //     ? state.currentNote.color
-  //     : NOTE_COLORS[0],
-  // });
-
-  state.notes[noteIndex].title = state.currentNote.title;
-  state.notes[noteIndex].text = state.currentNote.text;
-  state.notes[noteIndex].color = state.currentNote.color;
-
-  console.log(state.notes[noteIndex]);
   console.log(`saveCurrentNote`, state.currentNote);
 };
 
@@ -174,4 +156,19 @@ export const deleteNote = function (id) {
   console.log(`Before deleting ${noteID}`, state.notes);
   state.notes = state.notes.filter(note => note.id !== noteID);
   console.log(`After deleting`, state.notes);
+};
+
+export const saveNote = function (id, title, text, color) {
+  // console.log(`id is type: ${typeof id} - ${id}`);
+  const noteID = Number(id);
+
+  if (!_noteIDExists(noteID))
+    throw new Error(
+      `The note ID you are trying to save is not registered. Save operation aborted`
+    );
+
+  const noteIndex = _retrieveNoteIndex(noteID);
+  state.notes[noteIndex].title = title ?? state.notes[noteIndex].title;
+  state.notes[noteIndex].text = text ?? state.notes[noteIndex].text;
+  state.notes[noteIndex].color = color ?? state.notes[noteIndex].color;
 };

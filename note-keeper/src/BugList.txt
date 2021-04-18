@@ -9,4 +9,4 @@ Styling
 
 JS
 - Note View
--- Save and close logic is one step behind... does not udpate view with most recent information 
+-- FIXED - Save and close logic is one step behind... does not udpate view with most recent information 

@@ -3,23 +3,30 @@ class NotesView {
 
   renderNote(id, title, text, color) {
     // If the note exists, update the note you already have
-    const note = this._findNote(id);
+    console.log(`crafting a new note`);
     const markup = this._generateNoteMarkup(id, title, text, color);
-    console.log(`I'm gonna render this note:`, note);
+    this._parentEl.insertAdjacentHTML(`beforeend`, markup);
+    return this._parentEl.lastElementChild;
+  }
 
-    if (note !== undefined) {
-      note.querySelector(`.note--title`).textContent = title;
-      note.querySelector(`.note--text-body`).textContent = title;
-      return note;
-    } else {
-      this._parentEl.insertAdjacentHTML(`beforeend`, markup);
-      return this._parentEl.lastElementChild;
-    }
+  updateNoteContents(id, title, text, color) {
+    const note = this._findNote(id);
+    console.log(`I'm gonna update this note:`, note);
+
+    note.querySelector(`.note--title`).textContent = title;
+    note.querySelector(`.note--text-body`).textContent = text;
+    note.dataset.color = color;
+    return note;
   }
 
   removeNote(element) {
     element.remove();
     // console.log(element);
+  }
+
+  removeNoteByID(id) {
+    const note = this._findNote(id);
+    this.removeNote(note);
   }
 
   addHandlerDeleteNoteButton(handler, element) {
@@ -32,10 +39,33 @@ class NotesView {
     element.addEventListener(
       `click`,
       function (e) {
-        if (![...e.target.classList].includes(`note`)) return;
+        if (
+          !(
+            [...e.target.classList].includes(`note`) ||
+            [...e.target.classList].includes(`note--title`) ||
+            [...e.target.classList].includes(`note--text-body`)
+          )
+        )
+          return;
         handler.bind(element)();
       }.bind(element)
     );
+  }
+
+  addHandlersColorPickerNote(handler, element) {
+    element.querySelector(`.color-picker`).addEventListener(
+      `click`,
+      function (e) {
+        if (![...e.target.classList].includes(`color-picker--dot`)) return;
+        this._changeNoteColor(e.target.dataset.color, element);
+        handler.call(element);
+      }.bind(this)
+    );
+  }
+
+  _changeNoteColor(color, element) {
+    element.dataset.color = color;
+    // element.style.backgroundColor = `var(--note-color--${color}-solid)`;
   }
 
   _findNote(id) {

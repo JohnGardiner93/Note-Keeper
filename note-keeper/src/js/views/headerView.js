@@ -5,7 +5,6 @@ class HeaderView {
     this._parentEl
       .querySelector(`.btn--new-note`)
       .addEventListener(`click`, handler.bind(this));
-    console.log(this);
   }
 }
 
