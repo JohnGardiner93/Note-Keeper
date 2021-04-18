@@ -81,7 +81,6 @@ export const loadNote = function (id) {
   }
 
   // Get the note
-  // const [note] = state.notes.filter(note => note.id === id);
   const note = state.notes[_retrieveNoteIndex(id)];
 
   console.log(note);

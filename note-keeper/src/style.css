@@ -13,6 +13,8 @@
   --note-color--purple-solid: rgba(200, 104, 245);
   --btn--color: rgb(248, 232, 91);
   --background--color: rgb(255, 251, 190);
+  --filter-effect--red: invert(14%) sepia(89%) saturate(5832%)
+    hue-rotate(358deg) brightness(111%) contrast(119%);
 }
 
 /* General */
@@ -166,21 +168,20 @@ body {
 
 .btn--delete-note {
   position: absolute;
-  height: 1.6rem;
-  width: 1.6rem;
-  background-image: url('img/X.png');
-  background-size: 1.7rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  background-image: url('img/trash.png');
+  background-size: 1.5rem;
   background-position: center;
   opacity: 0%;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   padding: 0.2rem;
-  top: 1%;
-  left: 88%;
+  top: 2%;
+  left: 87%;
 }
 
 .btn--delete-note:hover {
-  box-shadow: 2px 2px 2px black;
-  cursor: pointer;
+  filter: var(--filter-effect--red);
 }
 
 .note[data-color='yellow'] {
@@ -272,8 +273,7 @@ body {
 .btn--modal--delete-note:hover {
   /* Red Filter */
   /* https://codepen.io/sosuke/pen/Pjoqqp */
-  filter: invert(14%) sepia(89%) saturate(5832%) hue-rotate(358deg)
-    brightness(111%) contrast(119%);
+  filter: var(--filter-effect--red);
 }
 
 /* Color Picker Module */
