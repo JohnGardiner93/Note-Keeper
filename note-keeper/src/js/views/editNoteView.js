@@ -74,7 +74,7 @@ class editNoteView {
 
   _changeNoteColor(color) {
     this._noteEl.dataset.color = color;
-    this._noteEl.style.backgroundColor = `var(--note-color--${color}-solid)`;
+    this._noteEl.style.backgroundColor = `var(--note-color--${color})`;
   }
 
   addHandlerDeleteButton(handler) {
