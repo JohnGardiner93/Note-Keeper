@@ -82,7 +82,7 @@ body {
 }
 
 .navbar--text {
-  font-family: 'Monoton', cursive;
+  font-family: "Monoton", cursive;
   font-size: var(--logo-size);
   text-align: center;
   width: fit-content;
@@ -187,7 +187,7 @@ body {
   position: absolute;
   height: 1.5rem;
   width: 1.5rem;
-  background-image: url('img/trash.png');
+  background-image: url("img/trash.png");
   background-size: 1.5rem;
   background-position: center;
   opacity: 0%;
@@ -201,19 +201,19 @@ body {
   filter: var(--filter-effect--red);
 }
 
-.note[data-color='yellow'] {
+.note[data-color="yellow"] {
   background-color: var(--note-color--yellow);
 }
-.note[data-color='blue'] {
+.note[data-color="blue"] {
   background-color: var(--note-color--blue);
 }
-.note[data-color='green'] {
+.note[data-color="green"] {
   background-color: var(--note-color--green);
 }
-.note[data-color='red'] {
+.note[data-color="red"] {
   background-color: var(--note-color--red);
 }
-.note[data-color='purple'] {
+.note[data-color="purple"] {
   background-color: var(--note-color--purple);
 }
 
@@ -275,7 +275,7 @@ body {
 }
 
 .btn--modal--close {
-  color: #aaa;
+  color: black;
   align-self: flex-end;
   font-size: 28px;
   font-weight: bold;
@@ -324,34 +324,34 @@ body {
   margin: 0rem 0.25rem 0rem 0.25rem;
 }
 
-.color-picker--dot[data-color='yellow'] {
+.color-picker--dot[data-color="yellow"] {
   background-color: var(--note-color--yellow);
 }
-.color-picker--dot[data-color='blue'] {
+.color-picker--dot[data-color="blue"] {
   background-color: var(--note-color--blue);
 }
-.color-picker--dot[data-color='green'] {
+.color-picker--dot[data-color="green"] {
   background-color: var(--note-color--green);
 }
-.color-picker--dot[data-color='red'] {
+.color-picker--dot[data-color="red"] {
   background-color: var(--note-color--red);
 }
-.color-picker--dot[data-color='purple'] {
+.color-picker--dot[data-color="purple"] {
   background-color: var(--note-color--purple);
 }
 
-.color-picker--active[data-color='yellow'] {
+.color-picker--active[data-color="yellow"] {
   border-color: var(--note-color--yellow);
 }
-.color-picker--active[data-color='blue'] {
+.color-picker--active[data-color="blue"] {
   border-color: var(--note-color--blue);
 }
-.color-picker--active[data-color='green'] {
+.color-picker--active[data-color="green"] {
   border-color: var(--note-color--green);
 }
-.color-picker--active[data-color='red'] {
+.color-picker--active[data-color="red"] {
   border-color: var(--note-color--red);
 }
-.color-picker--active[data-color='purple'] {
+.color-picker--active[data-color="purple"] {
   border-color: var(--note-color--purple);
 }
