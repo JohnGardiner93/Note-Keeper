@@ -1,16 +1,15 @@
-'use strict';
+"use strict";
 
-import * as model from './model.js';
-import notesView from './views/notesView.js';
-import editNoteView from './views/editNoteView.js';
-import headerView from './views/headerView.js';
+import * as model from "./model.js";
+import notesView from "./views/notesView.js";
+import editNoteView from "./views/editNoteView.js";
+import headerView from "./views/headerView.js";
 
-import { DEBUG_STATE } from './config.js';
-import { DEBUG_MODE } from './config.js';
+import { DEBUG_STATE } from "./config.js";
+import { DEBUG_MODE } from "./config.js";
 
 ////////////////////////////////////////////
 // Header Controls
-const controlHeaderBackToMainPage = function () {};
 
 const controlHeaderViewCreateNewNote = function () {
   // Read the ID of the element that initiated the function (if it exists)
@@ -33,7 +32,7 @@ const controlHeaderViewCreateNewNote = function () {
       model.state.currentNote.color
     );
 
-    notesViewRenderNote(
+    _notesViewRenderNote(
       model.state.currentNote.id,
       model.state.currentNote.title,
       model.state.currentNote.text,
@@ -64,7 +63,8 @@ const controlNotesViewOpenNote = function () {
     editNoteView.renderNote(
       model.state.currentNote.title,
       model.state.currentNote.text,
-      model.state.currentNote.color
+      model.state.currentNote.color,
+      model.state.currentNote.isNewNote
     );
   } catch (error) {}
 };
@@ -82,6 +82,11 @@ const controlNoteEditorUpdateNoteModel = function () {
 // const controlNoteEditorHighlightTextField = function () {};
 
 const controlNoteEditorClose = function () {
+  if (!editNoteView.noteTouched) {
+    controlNoteEditorDelete();
+    return;
+  }
+
   model.saveCurrentNote();
 
   notesView.updateNoteContents(
@@ -107,7 +112,7 @@ const controlNoteEditorDelete = function () {
 
 ////////////////////////////////////////////
 // Controller Functions
-const notesViewRenderNote = function (id, title, text, color) {
+const _notesViewRenderNote = function (id, title, text, color) {
   // ADD UPDATE VS NEW NOTE PATH
   const note = notesView.renderNote(id, title, text, color);
 
@@ -122,8 +127,8 @@ const init = function () {
     model.state.notes = DEBUG_STATE.notes;
     model.state.idLedger = DEBUG_STATE.idLedger;
   }
-  model.state.notes.forEach(note =>
-    notesViewRenderNote(note.id, note.title, note.text, note.color)
+  model.state.notes.forEach((note) =>
+    _notesViewRenderNote(note.id, note.title, note.text, note.color)
   );
   headerView.addHandlerNewNoteButton(controlHeaderViewCreateNewNote);
   editNoteView.addHandlerTextElementsFocusOut(controlNoteEditorUpdateNoteModel);

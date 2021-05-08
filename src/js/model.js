@@ -1,6 +1,6 @@
-'use strict';
-import { NOTE_COLORS } from './config.js';
-import { DEFAULT_NOTE_TEXT } from './config.js';
+"use strict";
+import { NOTE_COLORS } from "./config.js";
+import { DEFAULT_NOTE_TEXT } from "./config.js";
 
 export const state = {
   notes: [],
@@ -10,6 +10,7 @@ export const state = {
     color: NOTE_COLORS[0],
     id: -1,
     isNewNote: false,
+    // noteTouched: false,
   },
   idLedger: 0,
 };
@@ -113,11 +114,11 @@ const _addNoteToList = function (note) {
 
 const _noteIDExists = function (id) {
   // See if note ID is already in list
-  return state.notes.some(item => item.id === Number(id));
+  return state.notes.some((item) => item.id === Number(id));
 };
 
 const _retrieveNoteIndex = function (id) {
-  return state.notes.findIndex(note => note.id === id);
+  return state.notes.findIndex((note) => note.id === id);
 };
 
 export const editCurrentNote = function (title, text, color) {
@@ -153,7 +154,7 @@ export const deleteNote = function (id) {
   //Allow for blank pass into deleteNote to indicate delete current note
   const noteID = id ?? state.currentNote.id;
   console.log(`Before deleting ${noteID}`, state.notes);
-  state.notes = state.notes.filter(note => note.id !== noteID);
+  state.notes = state.notes.filter((note) => note.id !== noteID);
   console.log(`After deleting`, state.notes);
 };
 

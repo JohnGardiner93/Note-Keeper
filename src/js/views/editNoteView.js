@@ -1,5 +1,5 @@
-import { DEFAULT_NOTE_TEXT } from '../config.js';
-import { NOTE_COLORS } from '../config.js';
+import { DEFAULT_NOTE_TEXT } from "../config.js";
+import { NOTE_COLORS } from "../config.js";
 
 class editNoteView {
   _parentEl = document.querySelector(`.modal--background`);
@@ -12,12 +12,18 @@ class editNoteView {
   renderNote(
     title = DEFAULT_NOTE_TEXT[0],
     content = DEFAULT_NOTE_TEXT[1],
-    color = NOTE_COLORS[0]
+    color = NOTE_COLORS[0],
+    isNewNote = true
   ) {
     // Display note based on provided parameters
     this._noteTitleEl.textContent = title;
     this._noteTextEl.textContent = content;
     this._changeNoteColor(color);
+
+    // If this is not a new note, we want to make sure the note is still saved even if it's not touched at all.
+    if (!isNewNote) {
+      this._touchNote();
+    }
 
     this.renderNoteEditor();
   }
@@ -31,19 +37,24 @@ class editNoteView {
     this._noteTitleEl.textContent = DEFAULT_NOTE_TEXT[0];
     this._noteTextEl.textContent = DEFAULT_NOTE_TEXT[1];
     this._changeNoteColor(NOTE_COLORS[0]);
+    this._unTouchNote();
   }
 
   addHandlerTextElementsFocusOut(handler) {
-    [this._noteTitleEl, this._noteTextEl].forEach(el =>
+    [this._noteTitleEl, this._noteTextEl].forEach((el) =>
       el.addEventListener(`focusout`, handler)
     );
   }
 
   addHandlerTextElementsFocusIn() {
-    [this._noteTitleEl, this._noteTextEl].forEach(el =>
-      el.addEventListener(`focusin`, function (e) {
-        // e.target.select();
-      })
+    this._noteEl.addEventListener(
+      `focusin`,
+      function (e) {
+        if (e.target !== this._noteTitleEl && e.target !== this._noteTextEl) {
+          return;
+        }
+        this._touchNote();
+      }.bind(this)
     );
   }
 
@@ -53,6 +64,7 @@ class editNoteView {
       function (e) {
         if (![...e.target.classList].includes(`color-picker--dot`)) return;
         this._changeNoteColor(e.target.dataset.color);
+        this._touchNote();
         handler();
       }.bind(this)
     );
@@ -83,8 +95,16 @@ class editNoteView {
       .addEventListener(`click`, handler);
   }
 
-  touchNote() {
+  _touchNote() {
     this._noteTouched = true;
+  }
+
+  _unTouchNote() {
+    this._noteTouched = false;
+  }
+
+  get noteTouched() {
+    return this._noteTouched;
   }
 }
 
