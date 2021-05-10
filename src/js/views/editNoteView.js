@@ -59,6 +59,14 @@ class editNoteView {
     );
   }
 
+  addHandlerEscapeKey(handler) {
+    window.addEventListener(`keydown`, function (e) {
+      if (e.key === "Escape") {
+        handler();
+      }
+    });
+  }
+
   addHandlersColorPicker(handler) {
     this._colorPickerEl.addEventListener(
       `click`,

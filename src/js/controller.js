@@ -106,6 +106,11 @@ const controlNoteEditorDelete = function () {
   model.unloadCurrentNote();
 };
 
+const controlNoteEditorEscapeButton = function () {
+  controlNoteEditorUpdateNoteModel();
+  controlNoteEditorClose();
+};
+
 ////////////////////////////////////////////
 // Controller Functions
 const _notesViewRenderNote = function (id, title, text, color) {
@@ -131,6 +136,7 @@ const init = function () {
   editNoteView.addHandlerDeleteButton(controlNoteEditorDelete);
   editNoteView.addHandlersColorPicker(controlNoteEditorUpdateNoteModel);
   editNoteView.addHandlerTextElementsFocusIn();
+  editNoteView.addHandlerEscapeKey(controlNoteEditorEscapeButton);
 };
 
 init();
