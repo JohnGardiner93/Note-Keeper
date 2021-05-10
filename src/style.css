@@ -256,6 +256,11 @@ body {
   overflow: hidden;
 }
 
+.modal--note-title[placeholder]:empty::before {
+  content: attr(placeholder);
+  color: #555;
+}
+
 .modal--note-text {
   margin-bottom: 2rem;
   border: none;
@@ -264,6 +269,11 @@ body {
   outline: none;
   max-height: 30%;
   /* max-height: calc(100vh - 65vh); */
+}
+
+.modal--note-text[placeholder]:empty::before {
+  content: attr(placeholder);
+  color: #555;
 }
 
 .modal--footer {

@@ -10,8 +10,8 @@ class editNoteView {
   _noteTouched = false;
 
   renderNote(
-    title = DEFAULT_NOTE_TEXT[0],
-    content = DEFAULT_NOTE_TEXT[1],
+    title = "",
+    content = "",
     color = NOTE_COLORS[0],
     isNewNote = true
   ) {
@@ -23,6 +23,7 @@ class editNoteView {
     // If this is not a new note, we want to make sure the note is still saved even if it's not touched at all.
     if (!isNewNote) {
       this._touchNote();
+      // console.log("This note has been touched before");
     }
 
     this.renderNoteEditor();

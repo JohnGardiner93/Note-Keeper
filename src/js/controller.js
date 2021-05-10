@@ -10,7 +10,6 @@ import { DEBUG_MODE } from "./config.js";
 
 ////////////////////////////////////////////
 // Header Controls
-
 const controlHeaderViewCreateNewNote = function () {
   // Read the ID of the element that initiated the function (if it exists)
   let id = this.dataset?.id ?? -1;
@@ -79,8 +78,6 @@ const controlNoteEditorUpdateNoteModel = function () {
   model.editCurrentNote(title, text, color);
 };
 
-// const controlNoteEditorHighlightTextField = function () {};
-
 const controlNoteEditorClose = function () {
   if (!editNoteView.noteTouched) {
     controlNoteEditorDelete();
@@ -98,7 +95,6 @@ const controlNoteEditorClose = function () {
 
   model.unloadCurrentNote();
 
-  // Close the note editor
   editNoteView.closeNoteEditor();
 };
 
@@ -113,7 +109,6 @@ const controlNoteEditorDelete = function () {
 ////////////////////////////////////////////
 // Controller Functions
 const _notesViewRenderNote = function (id, title, text, color) {
-  // ADD UPDATE VS NEW NOTE PATH
   const note = notesView.renderNote(id, title, text, color);
 
   // Add note event handlers

@@ -17,8 +17,8 @@ export const state = {
 
 class Note {
   constructor(
-    title = DEFAULT_NOTE_TEXT[0],
-    text = DEFAULT_NOTE_TEXT[1],
+    title = "",
+    text = "",
     color = NOTE_COLORS[0],
     id = -1,
     isNewNote = false
@@ -31,8 +31,7 @@ class Note {
   }
 
   set title(title) {
-    if (!title) return;
-    this._title = title;
+    this._title = "" + title;
   }
 
   get title() {
@@ -40,8 +39,7 @@ class Note {
   }
 
   set text(text) {
-    if (!text) return;
-    this._text = text;
+    this._text = "" + text;
   }
 
   get text() {
