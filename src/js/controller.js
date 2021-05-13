@@ -5,7 +5,7 @@ import notesView from "./views/notesView.js";
 import editNoteView from "./views/editNoteView.js";
 import headerView from "./views/headerView.js";
 
-import { DEBUG_STATE } from "./config.js";
+import { DEBUG_STATE, LOCAL_STORAGE_NOTES } from "./config.js";
 import { DEBUG_MODE } from "./config.js";
 
 ////////////////////////////////////////////
@@ -47,11 +47,13 @@ const controlHeaderViewCreateNewNote = function () {
 const controlNotesViewDeleteNote = function () {
   notesView.removeNote(this);
   model.deleteNote(Number(this.dataset.id));
+  controlLocalStorageSaveNotes();
 };
 
 const controlNotesViewChangeNoteColor = function () {
   console.log(`controller view notes change color`, this);
   model.saveNote(this.dataset.id, undefined, undefined, this.dataset.color);
+  controlLocalStorageSaveNotes();
 };
 
 const controlNotesViewOpenNote = function () {
@@ -96,6 +98,8 @@ const controlNoteEditorClose = function () {
   model.unloadCurrentNote();
 
   editNoteView.closeNoteEditor();
+
+  controlLocalStorageSaveNotes();
 };
 
 const controlNoteEditorDelete = function () {
@@ -104,11 +108,27 @@ const controlNoteEditorDelete = function () {
   notesView.removeNoteByID(model.state.currentNote.id);
   model.deleteNote();
   model.unloadCurrentNote();
+  controlLocalStorageSaveNotes();
 };
 
 const controlNoteEditorEscapeButton = function () {
   controlNoteEditorUpdateNoteModel();
   controlNoteEditorClose();
+};
+
+////////////////////////////////////////////
+// Local Storage Interactions
+const controlLocalStorageLoadNotes = function () {
+  const notes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_NOTES));
+  if (!notes) return;
+  model.populateNoteModel(notes);
+  model.state.notes.forEach((note) =>
+    _notesViewRenderNote(note.id, note.title, note.text, note.color)
+  );
+};
+
+const controlLocalStorageSaveNotes = function () {
+  localStorage.setItem(LOCAL_STORAGE_NOTES, JSON.stringify(model.state.notes));
 };
 
 ////////////////////////////////////////////
@@ -127,9 +147,8 @@ const init = function () {
     model.state.notes = DEBUG_STATE.notes;
     model.state.idLedger = DEBUG_STATE.idLedger;
   }
-  model.state.notes.forEach((note) =>
-    _notesViewRenderNote(note.id, note.title, note.text, note.color)
-  );
+  controlLocalStorageLoadNotes();
+
   headerView.addHandlerNewNoteButton(controlHeaderViewCreateNewNote);
   editNoteView.addHandlerTextElementsFocusOut(controlNoteEditorUpdateNoteModel);
   editNoteView.addHandlerCloseButton(controlNoteEditorClose);
@@ -139,4 +158,5 @@ const init = function () {
   editNoteView.addHandlerEscapeKey(controlNoteEditorEscapeButton);
 };
 
+////////////////////////////////////////////
 init();

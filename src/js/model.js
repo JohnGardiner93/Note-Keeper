@@ -10,7 +10,6 @@ export const state = {
     color: NOTE_COLORS[0],
     id: -1,
     isNewNote: false,
-    // noteTouched: false,
   },
   idLedger: 0,
 };
@@ -23,11 +22,11 @@ class Note {
     id = -1,
     isNewNote = false
   ) {
-    this._title = title;
-    this._text = text;
-    this._color = color;
-    this._id = id;
-    this._isNewNote = isNewNote;
+    this.title = title;
+    this.text = text;
+    this.color = color;
+    this.id = id;
+    this.isNewNote = isNewNote;
   }
 
   set title(title) {
@@ -47,8 +46,7 @@ class Note {
   }
 
   set id(id) {
-    if (!(Number.isFinite(id) && id >= 0)) return;
-    this._id = id;
+    this._id = Number.isFinite(id) && id >= 0 ? id : -2;
   }
 
   get id() {
@@ -56,8 +54,7 @@ class Note {
   }
 
   set color(color) {
-    if (!NOTE_COLORS.includes(color)) return;
-    this._color = color;
+    this._color = NOTE_COLORS.includes(color) ? color : NOTE_COLORS[0];
   }
 
   get color() {
@@ -137,7 +134,6 @@ export const saveCurrentNote = function () {
     state.currentNote.text,
     state.currentNote.color
   );
-
   console.log(`saveCurrentNote`, state.currentNote);
 };
 
@@ -157,7 +153,6 @@ export const deleteNote = function (id) {
 };
 
 export const saveNote = function (id, title, text, color) {
-  // console.log(`id is type: ${typeof id} - ${id}`);
   const noteID = Number(id);
 
   if (!_noteIDExists(noteID))
@@ -169,4 +164,26 @@ export const saveNote = function (id, title, text, color) {
   state.notes[noteIndex].title = title ?? state.notes[noteIndex].title;
   state.notes[noteIndex].text = text ?? state.notes[noteIndex].text;
   state.notes[noteIndex].color = color ?? state.notes[noteIndex].color;
+};
+
+// Takes array of objects with note-like properties and makes them into Notes. Adds them to model. Also sets idLedger based on id's of notes received
+export const populateNoteModel = function (notes) {
+  // Create new notes using constructor
+  // Get largest ID from saved notes
+  const maxID = notes.reduce((id, note) => {
+    // Need to reconstruct notes that came from local storage to reestablish protype chain, etc.
+
+    const newNote = new Note(
+      note?._title,
+      note?._text,
+      note?._color,
+      note?._id
+    );
+    state.notes.push(newNote);
+
+    return +note._id > id ? +note._id : id;
+  }, 0);
+  // Adjust ID ledger
+  state.idLedger = maxID + 1;
+
 };
