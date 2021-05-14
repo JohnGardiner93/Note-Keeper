@@ -119,12 +119,17 @@ const controlNoteEditorEscapeButton = function () {
 ////////////////////////////////////////////
 // Local Storage Interactions
 const controlLocalStorageLoadNotes = function () {
-  const notes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_NOTES));
-  if (!notes) return;
-  model.populateNoteModel(notes);
-  model.state.notes.forEach((note) =>
-    _notesViewRenderNote(note.id, note.title, note.text, note.color)
-  );
+  try {
+    const notes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_NOTES));
+    model.populateNoteModel(notes);
+    model.state.notes.forEach((note) =>
+      _notesViewRenderNote(note.id, note.title, note.text, note.color)
+    );
+  } catch (err) {
+    // Problem with JSON file. Locally stored files not loaded:
+    console.error("💥 Error during LocalStorage load: 💥\n", err);
+    return;
+  }
 };
 
 const controlLocalStorageSaveNotes = function () {

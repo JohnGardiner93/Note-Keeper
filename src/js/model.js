@@ -186,4 +186,48 @@ export const populateNoteModel = function (notes) {
   // Adjust ID ledger
   state.idLedger = maxID + 1;
 
+  checkModelForErrors();
+};
+
+const checkModelForErrors = function (fixErrors = true) {
+  // Gathers the errors of each note in the model into an accumulator so that the information can be referenced and fixed (if desired)
+  const modelErrors = state.notes.reduce(
+    (err, note, location) => {
+      // If there's no note title and no note text, this really isn't a note. Flag the note for deletion and end the error sweep on this note
+      if (note?.text.trim() === "" && note?.title.trim() === "") {
+        err[location] = `blank note`;
+        return err;
+      }
+
+      // Check that the id is valid -> has a non-negative numerical id that is not already used by another note
+      if (
+        !Number.isFinite(note?.id) ||
+        note?.id < 0 ||
+        err.ids.includes(note?.id)
+      )
+        err[location] = `invalid id`;
+
+      // Keep a record of all the note ids that are cycled through so that we can check for duplicates later.
+      err.ids.push(note?.id);
+
+      if (!err[location]) err[location] = `no error`;
+      return err;
+    },
+    { errors: [], ids: [] }
+  );
+  console.log(`model errors`, modelErrors);
+
+  // Fix errors if requested
+  if (fixErrors && modelErrors) {
+    const newModelNotesState = state.notes.reduce((notes, note, i) => {
+      if (modelErrors[i] === `blank note`) return notes;
+      if (modelErrors[i].includes("id")) {
+        note.id = _generateNextID();
+      }
+      notes.push(note);
+      return notes;
+    }, []);
+    console.log(`here's the clean notes:`, newModelNotesState);
+    state.notes = newModelNotesState;
+  }
 };
