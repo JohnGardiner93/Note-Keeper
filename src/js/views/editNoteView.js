@@ -23,7 +23,6 @@ class editNoteView {
     // If this is not a new note, we want to make sure the note is still saved even if it's not touched at all.
     if (!isNewNote) {
       this._touchNote();
-      // console.log("This note has been touched before");
     }
 
     this.renderNoteEditor();
@@ -42,8 +41,16 @@ class editNoteView {
   }
 
   addHandlerTextElementsFocusOut(handler) {
-    [this._noteTitleEl, this._noteTextEl].forEach((el) =>
-      el.addEventListener(`focusout`, handler)
+    // Note is checked when the user stops focusing on the title or text. If title and text are blank, the note is made to be untouched. Prevents blank notes from making it to the NotesView
+    this._noteEl.addEventListener(
+      `focusout`,
+      function (e) {
+        if (e.target !== this._noteTitleEl && e.target !== this._noteTextEl) {
+          return;
+        }
+        if (this._noteIsBlank()) this._unTouchNote();
+        handler();
+      }.bind(this)
     );
   }
 
@@ -60,11 +67,17 @@ class editNoteView {
   }
 
   addHandlerEscapeKey(handler) {
-    window.addEventListener(`keydown`, function (e) {
-      if (e.key === "Escape") {
-        handler();
-      }
-    });
+    // Note is checked when the user hits escape to exit the note. If title and text are blank, the note is made to be untouched. Must be done on escape key event because full escape key event fires before focusout event. Prevents blank notes from making it to the NotesView.
+    window.addEventListener(
+      `keydown`,
+      function (e) {
+        if (e.key === "Escape") {
+          console.log(`escaped`);
+          if (this._noteIsBlank()) this._unTouchNote();
+          handler();
+        }
+      }.bind(this)
+    );
   }
 
   addHandlersColorPicker(handler) {
@@ -73,7 +86,6 @@ class editNoteView {
       function (e) {
         if (![...e.target.classList].includes(`color-picker--dot`)) return;
         this._changeNoteColor(e.target.dataset.color);
-        this._touchNote();
         handler();
       }.bind(this)
     );
@@ -110,6 +122,13 @@ class editNoteView {
 
   _unTouchNote() {
     this._noteTouched = false;
+  }
+
+  _noteIsBlank() {
+    return this._noteTitleEl.textContent.trim() === "" &&
+      this._noteTextEl.textContent.trim() === ""
+      ? true
+      : false;
   }
 
   get noteTouched() {
