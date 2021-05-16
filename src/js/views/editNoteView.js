@@ -71,6 +71,7 @@ class editNoteView {
     window.addEventListener(
       `keydown`,
       function (e) {
+        if (!this._displayIsActive()) return;
         if (e.key === "Escape") {
           console.log(`escaped`);
           if (this._noteIsBlank()) this._unTouchNote();
@@ -129,6 +130,10 @@ class editNoteView {
       this._noteTextEl.textContent.trim() === ""
       ? true
       : false;
+  }
+
+  _displayIsActive() {
+    return this._parentEl.style.display !== `none`;
   }
 
   get noteTouched() {
