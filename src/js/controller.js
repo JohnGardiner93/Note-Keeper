@@ -78,6 +78,13 @@ const controlNoteEditorUpdateNoteModel = function () {
   console.log(title, text, color);
   // Edit the note data in the model
   model.editCurrentNote(title, text, color);
+
+  notesView.updateNoteContents(
+    model.state.currentNote.id,
+    model.state.currentNote.title,
+    model.state.currentNote.text,
+    model.state.currentNote.color
+  );
 };
 
 const controlNoteEditorClose = function () {
