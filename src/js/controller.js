@@ -112,6 +112,11 @@ const controlNoteEditorDelete = function () {
 };
 
 const controlNoteEditorEscapeButton = function () {
+  if (!editNoteView.noteTouched) {
+    controlNoteEditorDelete();
+    return;
+  }
+
   controlNoteEditorUpdateNoteModel();
   controlNoteEditorClose();
 };
