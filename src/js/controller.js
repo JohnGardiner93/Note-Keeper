@@ -161,7 +161,7 @@ const init = function () {
 
   headerView.addHandlerNewNoteButton(controlHeaderViewCreateNewNote);
   editNoteView.addHandlerTextElementsFocusOut(controlNoteEditorUpdateNoteModel);
-  editNoteView.addHandlerCloseButton(controlNoteEditorClose);
+  editNoteView.addHandlersCloseNote(controlNoteEditorClose);
   editNoteView.addHandlerDeleteButton(controlNoteEditorDelete);
   editNoteView.addHandlersColorPicker(controlNoteEditorUpdateNoteModel);
   editNoteView.addHandlerTextElementsFocusIn();

@@ -100,10 +100,17 @@ class editNoteView {
     ];
   }
 
-  addHandlerCloseButton(handler) {
+  addHandlersCloseNote(handler) {
     this._noteEl
       .querySelector(`.btn--modal--close`)
       .addEventListener(`click`, handler);
+    this._parentEl.addEventListener(
+      `click`,
+      function (e) {
+        if (e.target !== this._parentEl) return;
+        handler();
+      }.bind(this)
+    );
   }
 
   _changeNoteColor(color) {
