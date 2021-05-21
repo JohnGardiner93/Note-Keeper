@@ -32,7 +32,7 @@ class NotesView {
   addHandlerDeleteNoteButton(handler, element) {
     element
       .querySelector(`.btn--delete-note`)
-      .addEventListener('click', handler.bind(element));
+      .addEventListener("click", handler.bind(element));
   }
 
   addHandlerClickNote(handler, element) {
@@ -70,7 +70,7 @@ class NotesView {
 
   _findNote(id) {
     return [...this._parentEl.querySelectorAll(`.note`)].find(
-      note => Number(note.dataset.id) === id
+      (note) => Number(note.dataset.id) === id
     );
   }
 
@@ -79,12 +79,8 @@ class NotesView {
       <div class="note" data-id="${id}" data-color="${color}">
         <div class="btn--delete-note"></div>
         <div class="note--content">
-          <p class="note--title">
-            ${title}
-          </p>
-          <p class="note--text-body">
-            ${text}
-          </p>
+          <p class="note--title">${title}</p>
+          <p class="note--text-body">${text}</p>
         </div>
         <div class="note--footer">
           <div class="color-picker">
