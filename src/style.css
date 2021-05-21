@@ -33,6 +33,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
 }
 
 html {
@@ -163,10 +164,11 @@ body {
 .note--title {
   font-weight: bold;
   max-height: 2.1rem;
-  max-width: 11rem;
   overflow-wrap: anywhere; /*Forces overflow text break to the next line once max width is reached*/
   overflow: hidden; /*Forces overflow text to be hidden once max-height is reached*/
   margin-bottom: 0.2rem;
+  width: 100%;
+  white-space: pre-wrap;
 }
 
 .note--text-body {
@@ -174,6 +176,8 @@ body {
   max-height: 9.7rem;
   line-height: 1.2rem;
   overflow: hidden; /*Forces overflow text to be hidden once max-height is reached*/
+  white-space: pre-wrap;
+  width: 100%;
 }
 
 .note--footer {
@@ -249,9 +253,11 @@ body {
   font-weight: bold;
   margin-bottom: 0.5rem;
   font-size: larger;
-  max-height: 3rem;
+  max-height: 2.8rem;
   overflow: auto;
+  outline: none; /*Removes outline around element when in focus*/
   flex: 0 0 auto; /*Controls how flex item grows (or doesn't)*/
+  white-space: pre-wrap;
 }
 
 .modal--note-title[placeholder]:empty::before {
@@ -266,6 +272,8 @@ body {
   width: 100%;
   flex: 2 0 max-content; /*Controls how flex item grows (or doesn't)*/
   max-height: 30%;
+  outline: none; /*Removes outline around element when in focus*/
+  white-space: pre-wrap;
 }
 
 .modal--note-text[placeholder]:empty::before {

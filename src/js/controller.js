@@ -172,6 +172,7 @@ const init = function () {
   editNoteView.addHandlerDeleteButton(controlNoteEditorDelete);
   editNoteView.addHandlersColorPicker(controlNoteEditorUpdateNoteModel);
   editNoteView.addHandlerTextElementsFocusIn();
+  editNoteView.addHandlersEnterKey();
   editNoteView.addHandlerEscapeKey(controlNoteEditorEscapeButton);
 };
 
