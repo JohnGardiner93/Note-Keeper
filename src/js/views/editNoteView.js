@@ -31,6 +31,7 @@ class editNoteView {
 
   renderNoteEditor() {
     this._parentEl.style.display = `block`;
+    this._noteTextEl.focus();
   }
 
   closeNoteEditor() {
