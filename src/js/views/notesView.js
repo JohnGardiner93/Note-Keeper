@@ -1,21 +1,28 @@
+import { computeScrollPosition, pixelsToNumber } from "../helpers.js";
+
 class NotesView {
   _parentEl = document.querySelector(`.container--notes`);
 
   renderNote(id, title, text, color) {
     // If the note exists, update the note you already have
-    console.log(`crafting a new note`);
     const markup = this._generateNoteMarkup(id, title, text, color);
     this._parentEl.insertAdjacentHTML(`beforeend`, markup);
-    return this._parentEl.lastElementChild;
+    const note = this._parentEl.lastElementChild;
+    this._adjustNoteForTextOverflow(note);
+    return note;
   }
 
   updateNoteContents(id, title, text, color) {
     const note = this._findNote(id);
-    console.log(`I'm gonna update this note:`, note);
+    const noteTitleEl = note.querySelector(`.note--title`);
+    const noteTextEl = note.querySelector(`.note--text-body`);
 
-    note.querySelector(`.note--title`).textContent = title;
-    note.querySelector(`.note--text-body`).textContent = text;
+    noteTitleEl.textContent = title;
+    noteTextEl.textContent = text;
     note.dataset.color = color;
+
+    this._adjustNoteForTextOverflow(note);
+
     return note;
   }
 
@@ -109,10 +116,49 @@ class NotesView {
       </div>
     `;
   }
+
+  _generateOverflowMarkup(color) {
+    return `<div class="fade" data-color="${color}">...</div>`;
+  }
+
+  _checkTextOverflows(textContainerElement) {
+    const totalElementHeight = pixelsToNumber(
+      window.getComputedStyle(textContainerElement).height
+    );
+    // Determine height of the provided text
+    const textHeight = computeScrollPosition(
+      textContainerElement,
+      textContainerElement.textContent.length
+    );
+    // If the provided text is longer that the viewable area of the container, the text is overflowing
+    // console.log(
+    //   `text overflows? ${textHeight} > ${totalElementHeight} = ${
+    //     textHeight > totalElementHeight
+    //   }`
+    // );
+    const textOverflows = textHeight > totalElementHeight;
+    return textOverflows;
+  }
+
+  _adjustNoteForTextOverflow(note) {
+    const textOverflows = this._checkTextOverflows(
+      note.querySelector(`.note--text-body`)
+    );
+
+    const fadeElement = note.querySelector(`.fade`);
+    if (textOverflows && !fadeElement) {
+      note
+        .querySelector(`.note--content`)
+        .insertAdjacentHTML(
+          `beforeend`,
+          this._generateOverflowMarkup(note.dataset.color)
+        );
+    }
+
+    if (!textOverflows) {
+      note.querySelector(`.fade`)?.remove();
+    }
+  }
 }
 
-// addHandlerNoteDisplay(handler) {}
-
 export default new NotesView();
-
-// const noteElements = notesContainerEl.querySelectorAll(`.note`);

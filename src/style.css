@@ -25,6 +25,7 @@
   --background--color: #fcff99;
   --navbar-color: rgb(250, 255, 127, 0.8);
   /* https://coolors.co/70d6ff-ff70a6-ff5c64-ff9770-82ff9e-fcff99-faff5c-aa97c3-fcf5c7-ffffc7 */
+  --font-size: 16px;
 }
 
 /* General */
@@ -33,7 +34,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: var(--font-size);
 }
 
 html {
@@ -155,15 +156,14 @@ body {
 }
 
 .note--content {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
+  position: relative; /*Set so that fade element can be positioned absolutely at end*/
   max-height: 12rem;
+  background-color: inherit; /*Inherit so that fade element can adapt to color of note*/
 }
 
 .note--title {
   font-weight: bold;
-  max-height: 2.1rem;
+  max-height: 2.2rem;
   overflow-wrap: anywhere; /*Forces overflow text break to the next line once max width is reached*/
   overflow: hidden; /*Forces overflow text to be hidden once max-height is reached*/
   margin-bottom: 0.2rem;
@@ -173,12 +173,102 @@ body {
 
 .note--text-body {
   overflow-wrap: anywhere; /*Forces overflow text break to the next line once max width is reached*/
-  max-height: 9.7rem;
+  height: 9.6rem;
   line-height: 1.2rem;
   overflow: hidden; /*Forces overflow text to be hidden once max-height is reached*/
   white-space: pre-wrap;
   width: 100%;
 }
+
+/* NOTE OVERFLOW FADE ELEMENT */
+.fade {
+  position: absolute;
+  z-index: 1;
+  bottom: 1%;
+  left: 0;
+  pointer-events: none;
+  width: 98%;
+  background-color: inherit;
+  height: auto;
+}
+
+/*Alternate Fade options*/
+/* NOTE OVERFLOW ELLIPSIS */
+/* .note--text-body::after {
+  content: "...";
+  font-size: large;
+  position: absolute;
+  z-index: 1;
+  bottom: 1%;
+  left: 0;
+  pointer-events: none;
+  width: 98%;
+}
+
+.note[data-color="yellow"] .note--text-body::after {
+  background-color: var(--note-color--yellow);
+}
+.note[data-color="blue"] .note--text-body::after {
+  background-color: var(--note-color--blue);
+}
+.note[data-color="green"] .note--text-body::after {
+  background-color: var(--note-color--green);
+}
+.note[data-color="red"] .note--text-body::after {
+  background-color: var(--note-color--red);
+}
+.note[data-color="purple"] .note--text-body::after {
+  background-color: var(--note-color--purple);
+} */
+
+/* NOTE OVERFLOW FADEAWAY */
+/* .note--text-body::after {
+  content: "";
+  font-size: inherit;
+  position: absolute;
+  z-index: 1;
+  bottom: 1%;
+  left: 0;
+  pointer-events: none;
+  width: 98%;
+  height: 2.5em;
+} */
+
+/* .note[data-color="yellow"] .note--text-body::after {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    var(--note-color--yellow) 90%
+  );
+}
+.note[data-color="blue"] .note--text-body::after {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    var(--note-color--blue) 90%
+  );
+}
+.note[data-color="green"] .note--text-body::after {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    var(--note-color--green) 90%
+  );
+}
+.note[data-color="red"] .note--text-body::after {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    var(--note-color--red) 90%
+  );
+}
+.note[data-color="purple"] .note--text-body::after {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    var(--note-color--purple) 90%
+  );
+} */
 
 .note--footer {
   /* z-index: -1; */
@@ -201,6 +291,7 @@ body {
   padding: 0.2rem;
   top: 2%;
   left: 87%;
+  z-index: 1; /*Required since note-content has a background and this element needs to be on top of it*/
 }
 
 .btn--delete-note:hover {
