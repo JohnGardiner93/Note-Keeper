@@ -1,6 +1,10 @@
 import { DEFAULT_NOTE_TEXT } from "../config.js";
 import { NOTE_COLORS } from "../config.js";
-import { pixelsToNumber } from "../helpers.js";
+import {
+  computeLineHeight,
+  computeScrollPosition,
+  pixelsToNumber,
+} from "../helpers.js";
 
 class editNoteView {
   _parentEl = document.querySelector(`.modal--background`);
@@ -135,12 +139,9 @@ class editNoteView {
             window.getComputedStyle(el).height
           );
           // Gets the position of the caret relative to the size of text body being edited
-          const scrollPosition = this._computeScrollPosition(
-            el,
-            newCaretPosition
-          );
+          const scrollPosition = computeScrollPosition(el, newCaretPosition);
           // Gets the height of the lines in the text body being edited
-          const elementLineHeight = this._computeLineHeight(el);
+          const elementLineHeight = computeLineHeight(el);
 
           // Determines if the position of the caret is at the last line of the scrollable window by comparing the position of the caret (relative to the first line of the text visible in the scroll window) with the total height of the scrollable window.
 
@@ -227,56 +228,6 @@ class editNoteView {
 
   get noteTouched() {
     return this._noteTouched;
-  }
-
-  // Determines the line height (leading) of the requested element by creating en empty element, duplicating the font-family and fontsize of the provided element, then adding a single new line to the created element. The resulting height of the newly created element is the line height of the element provided.
-  _computeLineHeight(el) {
-    const temp = document.createElement(el.nodeName);
-
-    // Copy the relevant stylings from the provided element into the temporary element
-    const elStyle = window.getComputedStyle(el);
-    temp.style.fontFamily = elStyle.fontFamily;
-    temp.style.fontSize = elStyle.fontSize;
-    temp.style.fontWeight = elStyle.fontWeight;
-    temp.style.position = "absolute";
-    temp.style.whiteSpace = elStyle.whiteSpace;
-
-    // Add text (and thus a line) to the temporary element
-    temp.textContent = "A";
-
-    // Add the temporary element to the parentNode of the provided element
-    el.parentNode.appendChild(temp);
-    const lineHeight = temp.clientHeight;
-
-    // Clean up - remove the temporary element from the document
-    temp.parentNode.removeChild(temp);
-
-    return lineHeight;
-  }
-
-  // Determines the scroll position of the cursor based on the cursor's position in the text body of the element provided. Works by removing all text after the caret position from a rough copy of the provided element. The resulting height of the truncated copy is the scroll position/location of the caret.
-  _computeScrollPosition(el, caretPosition) {
-    const temp = document.createElement(el.nodeName);
-
-    // Set the styling of the temperorary element. The styling must be absolute so that the temperorary element is not affected by the growth or size of the original element. The temporary element is otherwise susceptible to its siblings, as the original and temp element will share a parent.
-    const elStyle = window.getComputedStyle(el);
-    temp.style.fontFamily = elStyle.fontFamily;
-    temp.style.fontSize = elStyle.fontSize;
-    temp.style.fontWeight = elStyle.fontWeight;
-    temp.style.position = "absolute";
-    temp.style.whiteSpace = elStyle.whiteSpace;
-
-    // Set the text content of the temp element to be all the text up to the caret.
-    temp.textContent = el.textContent.slice(0, caretPosition);
-
-    // Add the temporary element to the parentNode of the provided element
-    el.parentNode.appendChild(temp);
-    const position = pixelsToNumber(window.getComputedStyle(temp).height);
-
-    // Clean up - remove the temporary element from the document
-    temp.parentNode.removeChild(temp);
-
-    return position;
   }
 }
 
