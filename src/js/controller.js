@@ -4,6 +4,7 @@ import * as model from "./model.js";
 import notesView from "./views/notesView.js";
 import editNoteView from "./views/editNoteView.js";
 import headerView from "./views/headerView.js";
+import noNotesView from "./views/noNotesView.js";
 
 import { DEBUG_STATE, LOCAL_STORAGE_NOTES } from "./config.js";
 import { DEBUG_MODE } from "./config.js";
@@ -37,9 +38,17 @@ const controlHeaderViewCreateNewNote = function () {
       model.state.currentNote.text,
       model.state.currentNote.color
     );
+
+    _noNotesViewUpdate();
   } catch (error) {
     console.error(error);
   }
+};
+
+////////////////////////////////////////////
+// noNotesView Controls
+const controlNoNotesViewCreateNote = function () {
+  controlHeaderViewCreateNewNote.call(notesView);
 };
 
 ////////////////////////////////////////////
@@ -48,6 +57,7 @@ const controlNotesViewDeleteNote = function () {
   notesView.removeNote(this);
   model.deleteNote(Number(this.dataset.id));
   controlLocalStorageSaveNotes();
+  _noNotesViewUpdate();
 };
 
 const controlNotesViewChangeNoteColor = function () {
@@ -107,6 +117,8 @@ const controlNoteEditorClose = function () {
   editNoteView.closeNoteEditor();
 
   controlLocalStorageSaveNotes();
+
+  _noNotesViewUpdate();
 };
 
 const controlNoteEditorDelete = function () {
@@ -116,6 +128,7 @@ const controlNoteEditorDelete = function () {
   model.deleteNote();
   model.unloadCurrentNote();
   controlLocalStorageSaveNotes();
+  _noNotesViewUpdate();
 };
 
 const controlNoteEditorEscapeButton = function () {
@@ -137,6 +150,7 @@ const controlLocalStorageLoadNotes = function () {
     model.state.notes.forEach((note) =>
       _notesViewRenderNote(note.id, note.title, note.text, note.color)
     );
+    _noNotesViewUpdate();
   } catch (err) {
     // Problem with JSON file. Locally stored files not loaded:
     console.error("💥 Error during LocalStorage load: 💥\n", err);
@@ -159,6 +173,18 @@ const _notesViewRenderNote = function (id, title, text, color) {
   notesView.addHandlersColorPickerNote(controlNotesViewChangeNoteColor, note);
 };
 
+const _noNotesViewUpdate = function () {
+  // console.log(`notes view is empty: ${notesView.isEmpty()}`);
+
+  if (notesView.isEmpty()) {
+    noNotesView.render();
+    headerView.highlightNewNoteButton();
+  } else {
+    noNotesView.hide();
+    headerView.unHighlightNewNoteButton();
+  }
+};
+
 const init = function () {
   if (DEBUG_MODE) {
     model.state.notes = DEBUG_STATE.notes;
@@ -174,6 +200,7 @@ const init = function () {
   editNoteView.addHandlerTextElementsFocusIn();
   editNoteView.addHandlersEnterKey();
   editNoteView.addHandlerEscapeKey(controlNoteEditorEscapeButton);
+  noNotesView.addHandlerNewNoteButton(controlNoNotesViewCreateNote);
 };
 
 ////////////////////////////////////////////

@@ -108,6 +108,7 @@ body {
 }
 
 .btn:hover {
+  animation-play-state: paused;
   box-shadow: 3px 3px 7px black;
   cursor: pointer;
 }
@@ -462,4 +463,49 @@ body {
 }
 .color-picker--active[data-color="purple"] {
   border-color: var(--note-color--purple);
+}
+
+/* No Notes View */
+.no-notes-message {
+  font-size: larger;
+  /* display: flex; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2% 5% 5% 5%;
+}
+
+.no-notes-message--image {
+  height: calc(var(--logo-size) * 1.5);
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.no-notes-message p {
+  font-size: inherit;
+  margin: 0rem 0.5rem 0.5rem 0.5rem;
+  width: fit-content;
+  text-align: center;
+}
+
+.btn--no-notes-message {
+  font-weight: bold;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 1rem;
+}
+
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 3px #0f0f0f;
+  }
+  50% {
+    box-shadow: 0 0 10px #0f0f0f;
+  }
+  100% {
+    box-shadow: 0 0 3px #0f0f0f;
+  }
+}
+
+.btn--highlight {
+  animation: glowing 3000ms infinite;
 }

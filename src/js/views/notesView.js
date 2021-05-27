@@ -159,6 +159,10 @@ class NotesView {
       note.querySelector(`.fade`)?.remove();
     }
   }
+
+  isEmpty() {
+    return this._parentEl.children.length === 0;
+  }
 }
 
 export default new NotesView();
