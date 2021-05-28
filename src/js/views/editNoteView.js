@@ -4,7 +4,7 @@ import { DEFAULT_NOTE_TEXT } from "../config.js";
 import { NOTE_COLORS } from "../config.js";
 import {
   computeLineHeight,
-  computeScrollPosition,
+  computeCursorYPosition,
   pixelsToNumber,
 } from "../helpers.js";
 
@@ -140,7 +140,7 @@ class editNoteView {
             window.getComputedStyle(el).height
           );
           // Gets the position of the caret relative to the size of text body being edited
-          const scrollPosition = computeScrollPosition(el, newCaretPosition);
+          const scrollPosition = computeCursorYPosition(el, newCaretPosition);
           // Gets the height of the lines in the text body being edited
           const elementLineHeight = computeLineHeight(el);
 

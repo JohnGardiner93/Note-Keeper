@@ -1,6 +1,6 @@
 "use strict";
 
-import { computeScrollPosition, pixelsToNumber } from "../helpers.js";
+import { computeCursorYPosition, pixelsToNumber } from "../helpers.js";
 
 class NotesView {
   _parentEl = document.querySelector(`.container--notes`);
@@ -126,7 +126,7 @@ class NotesView {
       window.getComputedStyle(textContainerElement).height
     );
     // Determine height of the provided text
-    const textHeight = computeScrollPosition(
+    const textHeight = computeCursorYPosition(
       textContainerElement,
       textContainerElement.textContent.length
     );
