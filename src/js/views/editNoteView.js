@@ -1,3 +1,5 @@
+"use strict";
+
 import { DEFAULT_NOTE_TEXT } from "../config.js";
 import { NOTE_COLORS } from "../config.js";
 import {
@@ -80,7 +82,6 @@ class editNoteView {
         if (!this._displayIsActive()) return;
         if (e.key === "Escape") {
           e.target.blur(); // Forces the Focus-Out event to happen before the rest of the escape event. Otherwise, focus-out event will occur after the escape event has executed, meaning the focus-out events will happen on an empty note.
-          console.log(`escaped`);
           if (this._noteIsBlank()) this._unTouchNote();
           handler();
         }
@@ -232,5 +233,3 @@ class editNoteView {
 }
 
 export default new editNoteView();
-
-// const btnEditorClose = noteEditorWindowEl.querySelector(`.btn--modal--close`);

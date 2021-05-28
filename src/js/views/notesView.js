@@ -1,3 +1,5 @@
+"use strict";
+
 import { computeScrollPosition, pixelsToNumber } from "../helpers.js";
 
 class NotesView {
@@ -28,7 +30,6 @@ class NotesView {
 
   removeNote(element) {
     element.remove();
-    // console.log(element);
   }
 
   removeNoteByID(id) {
@@ -72,7 +73,6 @@ class NotesView {
 
   _changeNoteColor(color, element) {
     element.dataset.color = color;
-    // element.style.backgroundColor = `var(--note-color--${color}-solid)`;
   }
 
   _findNote(id) {

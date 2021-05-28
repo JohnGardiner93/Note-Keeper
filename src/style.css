@@ -1,18 +1,8 @@
 /* Variables */
 :root {
   --logo-size: 3rem;
-  /* --note-color--yellow: rgba(247, 218, 123, 0.726); */
-  /* --note-color--blue: rgba(104, 130, 245, 0.76); */
-  /* --note-color--green: rgba(104, 245, 111, 0.589); */
-  /* --note-color--red: rgba(245, 104, 104, 0.664); */
-  /* --note-color--purple: rgba(200, 104, 245, 0.562); */
-  /* --note-color--yellow-solid: rgba(247, 218, 123); */
-  /* --note-color--blue-solid: rgba(104, 130, 245); */
-  /* --note-color--green-solid: rgba(104, 245, 111); */
-  /* --note-color--red-solid: rgba(245, 104, 104); */
-  /* --note-color--purple-solid: rgba(200, 104, 245); */
-  /* --background--color: rgb(255, 251, 190); */
-  /* --btn--color: rgb(248, 232, 91); */
+  --font-size: 16px;
+
   --filter-effect--red: invert(14%) sepia(89%) saturate(5832%)
     hue-rotate(358deg) brightness(111%) contrast(119%);
 
@@ -25,7 +15,6 @@
   --background--color: #fcff99;
   --navbar-color: rgb(250, 255, 127, 0.8);
   /* https://coolors.co/70d6ff-ff70a6-ff5c64-ff9770-82ff9e-fcff99-faff5c-aa97c3-fcf5c7-ffffc7 */
-  --font-size: 16px;
 }
 
 /* General */
@@ -72,7 +61,6 @@ body {
   border-radius: 1rem;
   align-self: center;
   width: fit-content;
-  /* min-width: 600px; */
   height: fit-content;
   box-shadow: 1px 1px 1px black;
   margin: 0.75rem 0.75rem 0.75rem 0.75rem;
@@ -124,13 +112,11 @@ body {
 
 /* Displayed Notes */
 .container--notes {
-  /* z-index: -2; */
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   position: relative;
-  /* margin-top: 10vh; */
 }
 
 .note {
@@ -139,8 +125,6 @@ body {
   width: 15rem;
   padding: 1rem;
   margin: 0.5rem;
-  /* border: 0.2px solid black; */
-  /* border-style: outset; */
   border-radius: 1rem;
 }
 
@@ -193,84 +177,6 @@ body {
   height: auto;
 }
 
-/*Alternate Fade options*/
-/* NOTE OVERFLOW ELLIPSIS */
-/* .note--text-body::after {
-  content: "...";
-  font-size: large;
-  position: absolute;
-  z-index: 1;
-  bottom: 1%;
-  left: 0;
-  pointer-events: none;
-  width: 98%;
-}
-
-.note[data-color="yellow"] .note--text-body::after {
-  background-color: var(--note-color--yellow);
-}
-.note[data-color="blue"] .note--text-body::after {
-  background-color: var(--note-color--blue);
-}
-.note[data-color="green"] .note--text-body::after {
-  background-color: var(--note-color--green);
-}
-.note[data-color="red"] .note--text-body::after {
-  background-color: var(--note-color--red);
-}
-.note[data-color="purple"] .note--text-body::after {
-  background-color: var(--note-color--purple);
-} */
-
-/* NOTE OVERFLOW FADEAWAY */
-/* .note--text-body::after {
-  content: "";
-  font-size: inherit;
-  position: absolute;
-  z-index: 1;
-  bottom: 1%;
-  left: 0;
-  pointer-events: none;
-  width: 98%;
-  height: 2.5em;
-} */
-
-/* .note[data-color="yellow"] .note--text-body::after {
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    var(--note-color--yellow) 90%
-  );
-}
-.note[data-color="blue"] .note--text-body::after {
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    var(--note-color--blue) 90%
-  );
-}
-.note[data-color="green"] .note--text-body::after {
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    var(--note-color--green) 90%
-  );
-}
-.note[data-color="red"] .note--text-body::after {
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    var(--note-color--red) 90%
-  );
-}
-.note[data-color="purple"] .note--text-body::after {
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    var(--note-color--purple) 90%
-  );
-} */
-
 .note--footer {
   /* z-index: -1; */
   opacity: 0%;
@@ -288,7 +194,6 @@ body {
   background-size: 1.5rem;
   background-position: center;
   opacity: 0%;
-  /* border-radius: 50%; */
   padding: 0.2rem;
   top: 2%;
   left: 87%;
@@ -325,7 +230,6 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
-  /* background-color: rgb(0, 0, 0); */
   background-color: rgb(0, 0, 0, 0.3);
 }
 
@@ -468,14 +372,13 @@ body {
 /* No Notes View */
 .no-notes-message {
   font-size: larger;
-  /* display: flex; */
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 2% 5% 5% 5%;
 }
 
-.no-notes-message--image {
+.no-notes-message--logo {
   height: calc(var(--logo-size) * 1.5);
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;

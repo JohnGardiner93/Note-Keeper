@@ -17,12 +17,11 @@ const controlHeaderViewCreateNewNote = function () {
   // If this is a new note, a new ID and note must be made
   if (id === -1) {
     id = model.createNewNote();
-    console.log(`Here is the new id`, id);
   }
 
   try {
     // Load the note as the current note in the model
-    console.log(model.state);
+    // console.log(model.state);
     model.loadNote(Number(id));
 
     //Load the note in the editNote view and the notesView
@@ -61,7 +60,6 @@ const controlNotesViewDeleteNote = function () {
 };
 
 const controlNotesViewChangeNoteColor = function () {
-  console.log(`controller view notes change color`, this);
   model.saveNote(this.dataset.id, undefined, undefined, this.dataset.color);
   controlLocalStorageSaveNotes();
 };
@@ -85,7 +83,6 @@ const controlNotesViewOpenNote = function () {
 const controlNoteEditorUpdateNoteModel = function () {
   // Get note data
   const [title, text, color] = editNoteView.getNoteState();
-  console.log(title, text, color);
   // Edit the note data in the model
   model.editCurrentNote(title, text, color);
 
@@ -174,8 +171,6 @@ const _notesViewRenderNote = function (id, title, text, color) {
 };
 
 const _noNotesViewUpdate = function () {
-  // console.log(`notes view is empty: ${notesView.isEmpty()}`);
-
   if (notesView.isEmpty()) {
     noNotesView.render();
     headerView.highlightNewNoteButton();

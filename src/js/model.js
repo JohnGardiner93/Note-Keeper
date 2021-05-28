@@ -79,7 +79,6 @@ export const loadNote = function (id) {
   // Get the note
   const note = state.notes[_retrieveNoteIndex(id)];
 
-  console.log(note);
   // Load the note
   state.currentNote.title = note.title;
   state.currentNote.text = note.text;
@@ -117,14 +116,11 @@ const _retrieveNoteIndex = function (id) {
 };
 
 export const editCurrentNote = function (title, text, color) {
-  console.log(`Editing Note`);
   state.currentNote.title = title.toString();
   state.currentNote.text = text.toString();
   state.currentNote.color = NOTE_COLORS.includes(color)
     ? color
     : NOTE_COLORS[0];
-  console.log(title, text, color);
-  console.log(`editCurrentNote`, state.currentNote);
 };
 
 export const saveCurrentNote = function () {
@@ -134,7 +130,6 @@ export const saveCurrentNote = function () {
     state.currentNote.text,
     state.currentNote.color
   );
-  console.log(`saveCurrentNote`, state.currentNote);
 };
 
 export const unloadCurrentNote = function () {
@@ -147,9 +142,7 @@ export const unloadCurrentNote = function () {
 export const deleteNote = function (id) {
   //Allow for blank pass into deleteNote to indicate delete current note
   const noteID = id ?? state.currentNote.id;
-  console.log(`Before deleting ${noteID}`, state.notes);
   state.notes = state.notes.filter((note) => note.id !== noteID);
-  console.log(`After deleting`, state.notes);
 };
 
 export const saveNote = function (id, title, text, color) {
@@ -215,7 +208,7 @@ const checkModelForErrors = function (fixErrors = true) {
     },
     { errors: [], ids: [] }
   );
-  console.log(`model errors`, modelErrors);
+  // console.log(`model errors`, modelErrors);
 
   // Fix errors if requested
   if (fixErrors && modelErrors) {
@@ -227,7 +220,7 @@ const checkModelForErrors = function (fixErrors = true) {
       notes.push(note);
       return notes;
     }, []);
-    console.log(`here's the clean notes:`, newModelNotesState);
+    // console.log(`Here's the clean notes:`, newModelNotesState);
     state.notes = newModelNotesState;
   }
 };

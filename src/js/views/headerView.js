@@ -1,3 +1,5 @@
+"use strict";
+
 class HeaderView {
   _parentEl = document.querySelector(`.header`);
   _buttonEl = this._parentEl.querySelector(`.btn--new-note`);
