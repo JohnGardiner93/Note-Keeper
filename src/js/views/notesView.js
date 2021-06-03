@@ -194,8 +194,8 @@ class NotesView {
    * @returns {String} - String representation of the fade element markup.
    * @todo Refactor to eliminate use of color variable. It is unnecessary.
    */
-  _generateOverflowMarkup(color) {
-    return `<div class="fade" data-color="${color}">...</div>`;
+  _generateOverflowMarkup() {
+    return `<div class="fade">...</div>`;
   }
 
   /**
@@ -237,10 +237,7 @@ class NotesView {
     if (textOverflows && !fadeElement) {
       note
         .querySelector(`.note--content`)
-        .insertAdjacentHTML(
-          `beforeend`,
-          this._generateOverflowMarkup(note.dataset.color)
-        );
+        .insertAdjacentHTML(`beforeend`, this._generateOverflowMarkup());
     }
 
     if (!textOverflows) {
