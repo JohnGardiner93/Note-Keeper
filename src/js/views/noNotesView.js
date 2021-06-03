@@ -1,8 +1,24 @@
 "use strict";
+/**
+ * Creates new noNotesView which displays a message and button if the user does not have any notes on the site.
+ * @module ./views/noNotesView.js
+ */
 
+/**
+ * Creates an object representation of the "no notes message" on the page. Contains an icon, message, and button
+ */
 class noNotesView {
-  _parentEl = document.querySelector(`.no-notes-message`);
+  /**
+   * Create the noNotesView object by finding the no notes message html block
+   */
+  constructor() {
+    this._parentEl = document.querySelector(`.no-notes-message`);
+  }
 
+  /**
+   * Add event handler to the new note button in the no notes message. When the button is pressed, the noNotesView is hidden, then the provided handler function is executed.
+   * @param {function} handler - The callback function to be executed when the new note button is pressed.
+   */
   addHandlerNewNoteButton(handler) {
     this._parentEl.querySelector(`.btn--no-notes-message`).addEventListener(
       `click`,
@@ -13,10 +29,16 @@ class noNotesView {
     );
   }
 
+  /**
+   * Renders the noNotesView by changing the display attribute of the block to flex.
+   */
   render() {
     this._parentEl.style.display = `flex`;
   }
 
+  /**
+   * Hides the noNotesView by changing the display attribute of the block to "none", removing it from the document flow.
+   */
   hide() {
     this._parentEl.style.display = `none`;
   }
