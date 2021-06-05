@@ -1,11 +1,22 @@
-/* Variables */
+/* CSS DIRECTORY
+	1. =GLOBAL STYLING
+	2. =HEADER
+	3. =NOTES VIEW
+  4. =EDIT NOTE VIEW
+  5. =NO NOTES MESSAGE
+  6. =COLOR PICKERS
+*/
+
+/* ====================
+   ===GLOBAL STYLING===
+   ==================== */
+
+/* GLOBAL VARIABLES */
 :root {
   --logo-size: 3rem;
   --font-size: 16px;
-
   --filter-effect--red: invert(14%) sepia(89%) saturate(5832%)
     hue-rotate(358deg) brightness(111%) contrast(119%);
-
   --note-color--yellow: #faff5c;
   --note-color--blue: #70d6ff;
   --note-color--green: #82ff9e;
@@ -17,7 +28,7 @@
   /* https://coolors.co/70d6ff-ff70a6-ff5c64-ff9770-82ff9e-fcff99-faff5c-aa97c3-fcf5c7-ffffc7 */
 }
 
-/* General */
+/* GENERAL */
 * {
   margin: 0;
   padding: 0;
@@ -41,6 +52,23 @@ body {
   align-items: center;
 }
 
+/* GLOBAL BUTTON STYLING */
+.btn {
+  background-color: var(--btn--color);
+  box-shadow: 1px 1px 3px black;
+}
+
+.btn:hover {
+  animation-play-state: paused;
+  box-shadow: 3px 3px 7px black;
+  cursor: pointer;
+}
+
+/* ============
+   ===HEADER===
+   ============ */
+
+/* HeaderView in JS */
 .header {
   position: -webkit-sticky;
   position: sticky;
@@ -52,7 +80,7 @@ body {
   z-index: 1;
 }
 
-/* Page navbar */
+/* NAVBAR*/
 .navbar {
   display: flex;
   align-items: center;
@@ -66,6 +94,7 @@ body {
   margin: 0.75rem 0.75rem 0.75rem 0.75rem;
 }
 
+/* NAVBAR CONTENTS */
 .navbar--logo {
   height: var(--logo-size);
   margin: 0 1rem 0 1rem;
@@ -78,7 +107,16 @@ body {
   width: fit-content;
 }
 
-/* Main Page Buttons */
+.btn--new-note {
+  border-radius: 50%;
+  font: 2.3rem Helvetica, Verdana, Tahoma;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  text-align: center;
+  margin: 1rem;
+}
+
+/* ❌ Not being used currently ❌ */
 .btn--main-link {
   position: absolute;
   left: 0%;
@@ -90,27 +128,11 @@ body {
   align-self: flex-start;
 }
 
-.btn {
-  background-color: var(--btn--color);
-  box-shadow: 1px 1px 3px black;
-}
+/* ==============
+   ==NOTES VIEW==
+   ============== */
 
-.btn:hover {
-  animation-play-state: paused;
-  box-shadow: 3px 3px 7px black;
-  cursor: pointer;
-}
-
-.btn--new-note {
-  border-radius: 50%;
-  font: 2.3rem Helvetica, Verdana, Tahoma;
-  height: 2.5rem;
-  min-width: 2.5rem;
-  text-align: center;
-  margin: 1rem;
-}
-
-/* Displayed Notes */
+/* NOTES CONTAINER */
 .container--notes {
   display: flex;
   flex-wrap: wrap;
@@ -119,6 +141,7 @@ body {
   position: relative;
 }
 
+/* INDIVIDUAL NOTE STYLING */
 .note {
   position: relative;
   height: 15rem;
@@ -128,6 +151,23 @@ body {
   border-radius: 1rem;
 }
 
+.note[data-color="yellow"] {
+  background-color: var(--note-color--yellow);
+}
+.note[data-color="blue"] {
+  background-color: var(--note-color--blue);
+}
+.note[data-color="green"] {
+  background-color: var(--note-color--green);
+}
+.note[data-color="red"] {
+  background-color: var(--note-color--red);
+}
+.note[data-color="purple"] {
+  background-color: var(--note-color--purple);
+}
+
+/* NOTE ACTIONS */
 .note:hover {
   border: 1px solid black;
 }
@@ -140,6 +180,7 @@ body {
   opacity: 100%;
 }
 
+/* NOTE CONTENTS */
 .note--content {
   position: relative; /*Set so that fade element can be positioned absolutely at end*/
   max-height: 12rem;
@@ -165,7 +206,7 @@ body {
   width: 100%;
 }
 
-/* NOTE OVERFLOW FADE ELEMENT */
+/* Element that overlays on note if the text overflows. Overflow detection handled in JS */
 .fade {
   position: absolute;
   z-index: 1;
@@ -204,23 +245,12 @@ body {
   filter: var(--filter-effect--red);
 }
 
-.note[data-color="yellow"] {
-  background-color: var(--note-color--yellow);
-}
-.note[data-color="blue"] {
-  background-color: var(--note-color--blue);
-}
-.note[data-color="green"] {
-  background-color: var(--note-color--green);
-}
-.note[data-color="red"] {
-  background-color: var(--note-color--red);
-}
-.note[data-color="purple"] {
-  background-color: var(--note-color--purple);
-}
+/* ==================
+   ==EDIT NOTE VIEW==
+   ================== */
 
-/* Modal Window - Note Editing */
+/* NOTE EDITOR MODAL WINDOW*/
+/* Covers entire page view */
 .modal--background {
   display: none;
   position: fixed;
@@ -233,6 +263,7 @@ body {
   background-color: rgb(0, 0, 0, 0.3);
 }
 
+/* Note being edited */
 .modal--note {
   display: flex;
   flex-direction: column;
@@ -245,6 +276,7 @@ body {
   border-radius: 10px;
 }
 
+/* NOTE EDITOR ELEMENTS */
 .modal--note-title {
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -312,7 +344,60 @@ body {
   filter: var(--filter-effect--red);
 }
 
-/* Color Picker Module */
+/* ====================
+   ==NO NOTES MESSAGE==
+   ==================== */
+
+/* Container */
+.no-notes-message {
+  font-size: larger;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2% 5% 5% 5%;
+}
+
+.no-notes-message--logo {
+  height: calc(var(--logo-size) * 1.5);
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+/* Text displayed when there isn't a note */
+.no-notes-message p {
+  font-size: inherit;
+  margin: 0rem 0.5rem 0.5rem 0.5rem;
+  width: fit-content;
+  text-align: center;
+}
+
+/* Create new note button */
+.btn--no-notes-message {
+  font-weight: bold;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 1rem;
+}
+
+/* HIGHLIGHT ANIMATION */
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 3px #0f0f0f;
+  }
+  50% {
+    box-shadow: 0 0 10px #0f0f0f;
+  }
+  100% {
+    box-shadow: 0 0 3px #0f0f0f;
+  }
+}
+
+.btn--highlight {
+  animation: glowing 3000ms infinite;
+}
+
+/* =================
+   ==COLOR PICKERS==
+   ================= */
 .color-picker {
   display: flex;
   flex-direction: row;
@@ -325,15 +410,17 @@ body {
   border: 2px white solid;
 }
 
-.color-picker--dot--modal {
-  width: 2rem;
-  height: 2rem;
-  margin: 0rem 0.25rem 0rem 0.25rem;
-}
-
+/* NOTE COLOR PICKER */
 .color-picker--dot--note {
   width: 1.5rem;
   height: 1.5rem;
+  margin: 0rem 0.25rem 0rem 0.25rem;
+}
+
+/* EDIT NOTE COLOR PICKER */
+.color-picker--dot--modal {
+  width: 2rem;
+  height: 2rem;
   margin: 0rem 0.25rem 0rem 0.25rem;
 }
 
@@ -353,6 +440,7 @@ body {
   background-color: var(--note-color--purple);
 }
 
+/* ❌ Not being used currently ❌ */
 .color-picker--active[data-color="yellow"] {
   border-color: var(--note-color--yellow);
 }
@@ -369,46 +457,8 @@ body {
   border-color: var(--note-color--purple);
 }
 
-/* No Notes View */
-.no-notes-message {
-  font-size: larger;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2% 5% 5% 5%;
-}
-
-.no-notes-message--logo {
-  height: calc(var(--logo-size) * 1.5);
-  margin-bottom: 0.5rem;
-  margin-left: 0.5rem;
-}
-
-.no-notes-message p {
-  font-size: inherit;
-  margin: 0rem 0.5rem 0.5rem 0.5rem;
-  width: fit-content;
-  text-align: center;
-}
-
-.btn--no-notes-message {
-  font-weight: bold;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  border-radius: 1rem;
-}
-
-@keyframes glowing {
-  0% {
-    box-shadow: 0 0 3px #0f0f0f;
-  }
-  50% {
-    box-shadow: 0 0 10px #0f0f0f;
-  }
-  100% {
-    box-shadow: 0 0 3px #0f0f0f;
-  }
-}
-
-.btn--highlight {
-  animation: glowing 3000ms infinite;
-}
+/*
+--------------- 
+Time for a brew
+---------------
+*/
