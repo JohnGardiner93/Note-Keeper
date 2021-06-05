@@ -1,7 +1,38 @@
+"use strict";
+
+/**
+ * Configuration information for application
+ * @module ../config.js
+ */
+
+/**
+ * Allowable note color strings.
+ * @constant
+ */
 export const NOTE_COLORS = [`yellow`, `blue`, `red`, `green`, `purple`];
+
+/**
+ * Default note text variables.
+ * @constant
+ */
 export const DEFAULT_NOTE_TEXT = [`Note Title`, `Note Text`, `Not Loaded`];
-export const DEBUG_MODE = false;
+
+/**
+ * Name of the localStorage variable.
+ * @constant
+ */
 export const LOCAL_STORAGE_NOTES = `notekeepernotes`;
+
+/**
+ * Debug mode. TRUE = enabled, FALSE = disabled
+ * @constant
+ */
+export const DEBUG_MODE = false;
+
+/**
+ * Debugging constants
+ * @constant
+ */
 export const DEBUG_STATE = {
   notes: [
     {
