@@ -1,6 +1,8 @@
 ## Note-Taking App - General Description
 
-General Description: This app was created in order to practice MVC architecture. The result is a fully-functioning note-taking app that allows users to take and save notes to their browser. It is done completely with Vanilla JS, CSS, and HTML.
+Documentation: https://johngardiner93.github.io/Note-Keeper/
+
+General Description: This app was created in order to practice MVC architecture. The result is a fully-functioning note-taking app that allows users to take and save notes to their browser. It is done completely with Vanilla JS, CSS, and HTML. It is entirely front-end. This app uses the user's browser's localStorage to store notes from previous sessions.
 
 Use Case Description: User can enter text into a text area to take a note. The note can then be saved. It will be displayed below the input are alongside other notes. Notes will be shown in a uniform manner. Notes can be seen with more detail (via button or clicking the element). A modal window will then show the note in full detail. Notes can also be deleted.
 
@@ -15,7 +17,7 @@ Feature List: ✅ = Implemented | ⭕ = Not Complete
 ✅ Change the color of notes in edit notes view or in main view using a custom color picker  
 ✅ Notes are saved to localStorage so that users can manage past notes  
 ✅ Allow users to enter multi line text into notes  
-⭕ Use JSDoc notation to document code
+✅ Use JSDoc notation to document code
 
 ---
 
