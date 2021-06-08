@@ -14,13 +14,14 @@ Feature List: ✅ = Implemented | ⭕ = Not Complete
 ✅ Delete notes either during editing or in main view  
 ✅ Change the color of notes in edit notes view or in main view using a custom color picker  
 ✅ Notes are saved to localStorage so that users can manage past notes  
-⭕ Allow users to enter multi line text into notes
+✅ Allow users to enter multi line text into notes  
+⭕ Use JSDoc notation to document code
 
 ---
 
 ## Installing This App
 
-This app currently does not require any 3rd party libraries. It can be installed and run on any computer with a browser.
+This app uses JSDoc for notation and documentation, but does note require 3rd party apps for actually running the application. It can be installed and run on any computer with a browser.
 
 You can use your favorite local-server app/extension to run this code. Or, you can simply open "index.html" in the "src" folder to use the app.
 
