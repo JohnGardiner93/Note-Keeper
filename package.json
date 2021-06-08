@@ -1,0 +1,26 @@
+{
+  "name": "notekeeper",
+  "version": "1.0.0",
+  "description": "Note keeping app.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "jsdoc -c jsdoc.json ./src/README.md",
+    "readme": "jsdoc --readme ./src/README.md ./src",
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnGardiner93/Note-Keeper.git"
+  },
+  "author": "John Gardiner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohnGardiner93/Note-Keeper/issues"
+  },
+  "homepage": "https://github.com/JohnGardiner93/Note-Keeper#readme",
+  "devDependencies": {
+    "jsdoc": "^3.6.7"
+  }
+}
