@@ -1,7 +1,7 @@
 "use strict";
 /**
  * Creates new HeaderView which hosts logo icon, title of the page, and a button to add a new note.
- * @module ./views/headerView.js
+ * @module headerView
  */
 
 /**
@@ -9,7 +9,7 @@
  */
 class HeaderView {
   /**
-   * Create a headerView
+   * Create a HeaderView object
    */
   constructor() {
     this._parentEl = document.querySelector(`.header`);
@@ -19,6 +19,7 @@ class HeaderView {
   /**
    * Add event handler to the new note button.
    * @param {function} handler - The callback function to be executed when the new note button is pressed.
+   * @static
    */
   addHandlerNewNoteButton(handler) {
     this._buttonEl.addEventListener(`click`, handler.bind(this));
@@ -26,6 +27,7 @@ class HeaderView {
 
   /**
    * Highlight the new note button by adding a class to its classList
+   * @static
    */
   highlightNewNoteButton() {
     this._buttonEl.classList.add(`btn--highlight`);
@@ -33,6 +35,7 @@ class HeaderView {
 
   /**
    * Unhighlight the new note button by removing a class from its classList
+   * @static
    */
   unHighlightNewNoteButton() {
     this._buttonEl.classList.remove(`btn--highlight`);

@@ -2,7 +2,7 @@
 
 /**
  * Configuration information for application
- * @module ../config.js
+ * @module config
  */
 
 /**
