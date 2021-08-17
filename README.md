@@ -1,12 +1,24 @@
-## Note-Taking App - General Description
+# Note-Keeper: A Note-Taking App
+Visit live website (here)[https://jrgnotekeeper.netlify.app/]
 
-Documentation: https://johngardiner93.github.io/Note-Keeper/
+## Table of Contents
+- [Description](#Description)
+- [Use Cases](#Use Cases)
+- [Feature List](#Feature List)
+- [Installing This App](#Installing This App)
+- [JSDoc Documentation](#JSDoc Documentation)
 
-General Description: This app was created in order to practice MVC architecture. The result is a fully-functioning note-taking app that allows users to take and save notes to their browser. It is done completely with Vanilla JS, CSS, and HTML. It is entirely front-end. This app uses the user's browser's localStorage to store notes from previous sessions.
+[!Main Screen](https://user-images.githubusercontent.com/7349117/129696800-e99bf5b6-3262-4fdf-8aec-4cc7132922dd.png)  
+[!Note Edit](https://user-images.githubusercontent.com/7349117/129696884-acc48740-c2df-4dfd-af62-ea4279f3dae4.png)
 
-Use Case Description: User can enter text into a text area to take a note. The note can then be saved. It will be displayed below the input are alongside other notes. Notes will be shown in a uniform manner. Notes can be seen with more detail (via button or clicking the element). A modal window will then show the note in full detail. Notes can also be deleted.
+## Description:  
+This app was created in order to practice MVC architecture. The result is a fully-functioning note-taking app that allows users to take and save notes to their browser. It is done completely with Vanilla JS, CSS, and HTML. It is entirely front-end. This app uses the user's browser's localStorage to store notes from previous sessions.
 
-Feature List: ✅ = Implemented | ⭕ = Not Complete
+## Use Cases:  
+User can enter text into a text area to take a note. The note can then be saved. It will be displayed below the input are alongside other notes. Notes will be shown in a uniform manner. Notes can be seen with more detail (via button or clicking the element). A modal window will then show the note in full detail. Notes can also be deleted.
+
+## Feature List: 
+✅ = Implemented | ⭕ = Not Complete
 
 ✅ Input field - text area  
 ✅ New Note Button  
@@ -28,3 +40,7 @@ This app uses JSDoc for notation and documentation, but does note require 3rd pa
 You can use your favorite local-server app/extension to run this code. Or, you can simply open "index.html" in the "src" folder to use the app.
 
 Alternatively, this app is available Netlify for viewing and usage anywhere (see Github Project "About" section).
+
+## JSDoc Documentation:
+JSDoc documentation can be found [here](https://johngardiner93.github.io/Note-Keeper/).
+
