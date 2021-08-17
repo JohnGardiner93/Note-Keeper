@@ -1,5 +1,5 @@
 # Note-Keeper: A Note-Taking App
-Visit live website (here)[https://jrgnotekeeper.netlify.app/]
+Visit live website [here](https://jrgnotekeeper.netlify.app/)
 
 ## Table of Contents
 - [Description](#description)
