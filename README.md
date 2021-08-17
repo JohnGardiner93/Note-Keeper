@@ -3,13 +3,13 @@ Visit live website (here)[https://jrgnotekeeper.netlify.app/]
 
 ## Table of Contents
 - [Description](#Description)
-- [Use Cases](#Use Cases)
-- [Feature List](#Feature List)
-- [Installing This App](#Installing This App)
-- [JSDoc Documentation](#JSDoc Documentation)
+- [Use Cases](#Use)
+- [Feature List](#Feature)
+- [Installing This App](#Installing)
+- [JSDoc Documentation](#JSDoc)
 
-[!Main Screen](https://user-images.githubusercontent.com/7349117/129696800-e99bf5b6-3262-4fdf-8aec-4cc7132922dd.png)  
-[!Note Edit](https://user-images.githubusercontent.com/7349117/129696884-acc48740-c2df-4dfd-af62-ea4279f3dae4.png)
+![Main Screen](https://user-images.githubusercontent.com/7349117/129696800-e99bf5b6-3262-4fdf-8aec-4cc7132922dd.png)  
+![Note Edit](https://user-images.githubusercontent.com/7349117/129696884-acc48740-c2df-4dfd-af62-ea4279f3dae4.png)
 
 ## Description:  
 This app was created in order to practice MVC architecture. The result is a fully-functioning note-taking app that allows users to take and save notes to their browser. It is done completely with Vanilla JS, CSS, and HTML. It is entirely front-end. This app uses the user's browser's localStorage to store notes from previous sessions.
